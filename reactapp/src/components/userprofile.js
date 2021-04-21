@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 const categorys = [
+    { value: '', label: 'Select' },
     { value: 'relationship', label: 'Relationship' },
     { value: 'communication', label: 'Communication' },
     { value: 'management', label: 'Management' },
@@ -17,8 +18,9 @@ export default class UserProfileView extends Component {
         profiles:[],
         user: "",
         userProfile: [],
-        category: "",
+        category: [],
         name:"",
+        message:"",
      }
 
     componentDidMount = async () => {
@@ -45,31 +47,30 @@ export default class UserProfileView extends Component {
         .then(res => {
             console.log(res.data);
             this.setState({user:res.data});
-            console.log(`current state of user ${this.state.user}`);
-            console.log(`current state of user_id ${this.state.user.pk}`);
+            //console.log(`current state of user ${this.state.user}`);
+            //console.log(`current state of user_id ${this.state.user.pk}`);
         });
 
         var profileFiltered = this.state.profiles.filter(profile=> profile.user_id==this.state.user.pk)
-        console.log(`profile filtered ${profileFiltered}`)
+        //console.log(`profile filtered ${profileFiltered}`)
         await this.setState({userProfile:profileFiltered})
-        console.log(`User profile is ${this.state.userProfile}`)
+        //console.log(`User profile is ${this.state.userProfile}`)
         
     }
 
     handleCategoryChange = (selectedCategory) => {
-        this.setState({ category: selectedCategory.value });
-        console.log('Category selected:', selectedCategory)
+        this.setState({ category: selectedCategory.target.value });
+        //console.log('Category selected:', selectedCategory)
+        //console.log('Category selected:', selectedCategory.value)
+        console.log(`e-value ${selectedCategory.target.value}`)
         }
 
     handleNameChange = event => {
         this.setState({ name: event.target.value });
         }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
-       
-        //console.log(_csrfToken);
-
         const user = {
             category: this.state.category,
             name: this.state.name,
@@ -79,27 +80,24 @@ export default class UserProfileView extends Component {
         const options = {
             headers: {
                 'Content-Type': 'application/json',
-                //'Cookie' : `csrftoken=${_csrfToken}`,
                 "X-CSRFToken": cookies.get("csrftoken"),
             }
           };
-
-        console.log(user)
-
-        axios.post(`http://127.0.0.1:8000/api/v1/profiles/${this.state.user.pk}/skills/`, { category: this.state.category, name: this.state.name }, options)
+        
+        //console.log(`calleddddd ${this.state.user.pk}`)
+        await axios.post(`http://127.0.0.1:8000/api/v1/profiles/${this.state.user.pk}/skills/`, { category: this.state.category, name: this.state.name }, options)
         .then(res => {
           console.log(res);
           console.log(res.data);
 
-          if(res.status==200){
+          if(res.status!==404){
             console.log("Skill added");
-            this.props.history.push('/user-profile');
+            //this.props.history.push('/user-profile');
+            //this.setState({message:"A new skill has been added"});
           } else{
             console.log("Could not add skill.")
+            console.log(res.status)
           }
-        }).catch((err) => {
-            console.log(err);
-            this.setState({error: "Could not add skill after catching error."})
         });
         /*.then(() => {
             console.log(this.state)
@@ -111,7 +109,18 @@ export default class UserProfileView extends Component {
       }
 
     render() { 
-        const { selectedCategory } = this.state.category;
+        //const { selectedCategory } = this.state.category;
+        const message = this.state.message;
+        const skills = this.state.userProfile;
+        //console.log(`skills is ${skills[0].skills}`)
+        let listOfSkills;
+        for (let i of skills){
+            listOfSkills = i.skills.map((x)=>
+                <li>{x}</li>
+            );
+        }
+
+        //console.log(listOfSkills)
         return (
         <>
         <div>
@@ -125,7 +134,7 @@ export default class UserProfileView extends Component {
                     <ul>
                         { this.state.userProfile.map(profile => <li>{profile.bio}</li>)}
                     </ul>
-                    <a href="#!" onClick={this.getProfiles} class="btn btn-primary">Edit</a>
+                    <a href="#!" onClick={this.getProfiles} class="btn btn-primary">Edit- to Adams form</a>
                 </div>
             </div>
 
@@ -133,8 +142,11 @@ export default class UserProfileView extends Component {
                 <div class="card-body">
                     <h4 class="card-title">Skills</h4>
                     <p class="card-text">
-                        get as a list
+                        Current skills
                     </p>
+                    <ul>
+                        {listOfSkills}
+                    </ul>
                     <form onSubmit={this.handleSubmit}>
                         <div class="form-group">
                             <label for="Select">Choose skills</label>
@@ -146,15 +158,16 @@ export default class UserProfileView extends Component {
                         </div>
                         <div class="form-group">
                                 <label for="Name">Name:</label>
-                                <input type="text" onChange={this.handleNameChange} class="form-control" placeholder="Name of skill"/>
+                                <input type="text" onChange={this.handleNameChange} class="form-control" placeholder="Enter name of skill ie Python"/>
                         </div>
-                            <button type="submit" class="btn btn-dark btn-block">Submit</button>
+                            <button type="submit" class="btn btn-dark btn-block">Add a skill</button>
+                            <p>{message}</p>
                     </form>
                 </div>
             </div>
-
+                                   
         </div>
-        
+
         </>
         );
     }
@@ -168,3 +181,6 @@ export default class UserProfileView extends Component {
 // {/* <ul>
 //     { this.state.profiles.map(profile => <li>{profile.username}</li>)}
 // </ul> */}
+// {/* <ul>
+//                         { this.state.userProfile.map(profile => <li>{profile.skills}</li>)}
+//                     </ul> */}
