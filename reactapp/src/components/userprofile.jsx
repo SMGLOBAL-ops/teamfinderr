@@ -126,28 +126,11 @@ export default class UserProfileView extends Component {
         <div>
 
             <div class="card">
-<<<<<<< HEAD:reactapp/src/components/userprofile.jsx
-                <img class="card-img-top" src="/images/pathToYourImage.png" alt="Card cap"/>
-=======
                 <img class="card-img-top" src="https://images.pexels.com/photos/1000445/pexels-photo-1000445.jpeg?auto=compress" alt="Card image cap"/>
->>>>>>> 722ef4ee5ed45a0ad4a4f70b0d220be8a5788a6d:reactapp/src/components/userprofile.js
                 <div class="card-body">
                     <h4 class="card-title">Bio</h4>
                     <p class="card-text">
                     </p>
-<<<<<<< HEAD:reactapp/src/components/userprofile.jsx
-                    <a href="#!" className="btn btn-primary">Edit</a>
-                </div>
-            </div>
-
-            <div className="card">
-                <div className="card-body">
-                    <h4 className="card-title">Skills</h4>
-                    <p className="card-text">
-                        get as a list
-                    </p>
-                    <a href="#!" className="btn btn-primary">Edit</a>
-=======
                     <ul>
                         { this.state.userProfile.map(profile => <li>{profile.bio}</li>)}
                     </ul>
@@ -180,7 +163,6 @@ export default class UserProfileView extends Component {
                             <button type="submit" class="btn btn-dark btn-block">Add a skill</button>
                             <p>{message}</p>
                     </form>
->>>>>>> 722ef4ee5ed45a0ad4a4f70b0d220be8a5788a6d:reactapp/src/components/userprofile.js
                 </div>
             </div>
                                    
