@@ -13,6 +13,7 @@ import UserProfileView from './components/userprofile'
 import MembersProfileView from './components/memberprofile'
 import Home from './components/home'
 import ProjectListView from './components/projectlist'
+import CreateProfile from './components/createprofile';
 
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
             <Route path="/user-profile" component={UserProfileView} />
             <Route path="/member-profile" component={MembersProfileView} />
             <Route path="/project-list" component={ProjectListView} />
+            <Route path="/create-profile" component={CreateProfile} />
           </Switch>
         </div>
       </div>
