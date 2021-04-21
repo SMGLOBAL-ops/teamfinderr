@@ -24,7 +24,8 @@ export default class SignUp extends Component {
         username: '',
         email: '',
         password1: '',
-        password2: ''
+        password2: '',
+        error: ''
       }
 
     redirectLoginPage = event => {

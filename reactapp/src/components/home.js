@@ -96,11 +96,11 @@ export default class Home extends Component {
         <form>
             <h4>Create a project</h4>
             <div className="form-group">
-                <label for="formGroupExampleInput">Project Name</label>
+                <label htmlFor="formGroupExampleInput">Project Name</label>
                 <input type="text" onChange={this.handleNameChange.bind(this)} className="form-control" id="formGroupExampleInput" placeholder="Enter project name"/>
             </div>
             <div className="form-group">
-                    <label for="formGroupExampleInput">Description</label>
+                    <label htmlFor="formGroupExampleInput">Description</label>
                     <textarea rows = "5" cols = "60" name="description" onChange={this.handleDescChange.bind(this)} 
                     className="form-control" >
                         Write description here ...

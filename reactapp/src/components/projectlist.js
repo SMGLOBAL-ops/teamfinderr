@@ -36,11 +36,11 @@ export default class ProjectListView extends Component {
                
                 <br/>
                 <h4>Search</h4>
-                <div class="input-group">
+                <div className="input-group">
                     
-                    <input type="text" class="form-control" placeholder="Find a project..." aria-label="" aria-describedby="basic-addon1"/>
-                    <div class="input-group-append">
-                        <button class="btn btn-success" type="button">Go</button>
+                    <input type="text" className="form-control" placeholder="Find a project..." aria-label="" aria-describedby="basic-addon1"/>
+                    <div className="input-group-append">
+                        <button className="btn btn-success" type="button">Go</button>
                     </div>
                     
                 </div>

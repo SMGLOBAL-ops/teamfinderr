@@ -8,6 +8,7 @@ export default class CreateProfile extends Component {
     state = {
         bio: '',
         chars_left: 255,
+        error: ''
       }
 
     redirectHome = event => {
@@ -24,6 +25,8 @@ export default class CreateProfile extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        
+        console.log(this.state.bio)
 
         const profile = {
             bio: this.state.bio,
@@ -35,6 +38,8 @@ export default class CreateProfile extends Component {
                 "X-CSRFToken": cookies.get("csrftoken"),
             }
           };
+
+        console.log(options.headers["X-CSRFToken"])
 
         axios.post(`http://127.0.0.1:8000/api/v1/profiles/`, { bio: this.state.bio }, options)
         .then(res => {
