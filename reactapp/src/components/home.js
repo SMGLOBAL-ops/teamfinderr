@@ -23,7 +23,7 @@ export default class Home extends Component {
             
             <input type="text" class="form-control" placeholder="Find a member..." aria-label="" aria-describedby="basic-addon1"/>
             <div class="input-group-append">
-                <button class="btn btn-success" type="button">Go</button>
+                <button class="btn btn-dark" type="button">Go</button>
             </div>
             
         </div>
@@ -48,7 +48,7 @@ export default class Home extends Component {
                 <label for="formGroupExampleInput2">Description</label>
                 <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter project description"/>
             </div>
-            <button class="btn btn-success" type="button">Submit</button>
+            <button class="btn btn-dark" type="button">Submit</button>
         </form>
         <br/>
         <button class="btn btn-primary btn-block" onClick={() => this.projectList()} type="button">Join a new project</button>
