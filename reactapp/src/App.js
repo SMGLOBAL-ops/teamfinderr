@@ -8,7 +8,6 @@ import Login from "./components/login";
 import SignUp from "./components/signup";
 import PasswordChange from "./components/passwordchange"
 import UserProfileView from './components/userprofile'
-import MembersProfileView from './components/memberprofile'
 import Home from './components/home'
 import ProjectListView from './components/projectlist'
 import CreateProfile from './components/createprofile';
@@ -57,7 +56,6 @@ function App() {
             <Route path="/home" component={Home} />
             <Route path="/password-change" component={PasswordChange} />
             <Route path="/user-profile" component={UserProfileView} />
-            <Route path="/member-profile" component={MembersProfileView} />
             <Route path="/project-list" component={ProjectListView} />
             <Route path="/create-profile" component={CreateProfile} />
           </Switch>
