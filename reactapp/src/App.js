@@ -14,6 +14,7 @@ import ProjectListView from './components/projectlist'
 import CreateProfile from './components/createprofile';
 
 
+
 function App() {
   return (<Router>
     <div className="App">
@@ -25,20 +26,17 @@ function App() {
           <Link className="navbar-brand" to={"/sign-in"}>TeamFound inc.</Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                <Link className="nav-link" to={"/user-profile"}>User</Link>
-                </li>
-                <li className="nav-item">
-                <Link className="nav-link" to={"/sign-in"}>Sign in</Link>
-                </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/sign-up"}>Sign up</Link>
-              </li>
               <li className="nav-item">
                 <Link className="nav-link" to={"/home"}>Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to={"/password-change"}>ForgotPassword</Link>
+                <Link className="nav-link" to={"/sign-in"}>Sign in</Link>
+                </li>
+                <li className="nav-item">
+                <Link className="nav-link" to={"/user-profile"}>User</Link>
+                </li>
+              <li className="nav-item">
+                <Link className="nav-link" to={"/sign-up"}>Sign up</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to={"/project-list"}>Projects</Link>
