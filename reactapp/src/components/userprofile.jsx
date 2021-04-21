@@ -8,7 +8,7 @@ class UserProfileView extends Component {
         <div>
 
             <div class="card">
-                <img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap"/>
+                <img class="card-img-top" src="/images/pathToYourImage.png" alt="Card cap"/>
                 <div class="card-body">
                     <h4 class="card-title">Bio</h4>
                     <p class="card-text">
