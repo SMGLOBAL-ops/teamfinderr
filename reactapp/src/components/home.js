@@ -23,7 +23,7 @@ export default class Home extends Component {
         this.props.history.push('/create-profile')
     }
 
-    handleBioChange = event => {
+    handleDescChange = event => {
         this.setState({ description: event.target.value });
         this.setState({
             chars_left: 500 - event.target.value.length
@@ -32,10 +32,6 @@ export default class Home extends Component {
 
     handleNameChange = event => {
         this.setState({ name: event.target.value });
-        }
-
-    handleDescChange = event => {
-        this.setState({ description: event.target.value });
         }
 
     createProjectSubmit = (event) => {
@@ -78,22 +74,22 @@ export default class Home extends Component {
         <h1>Home</h1>
         <p>Welcome {}</p>
         <h4>Search</h4>
-        <div class="input-group">
+        <div className="input-group">
             
-            <input type="text" class="form-control" placeholder="Find a member..." aria-label="" aria-describedby="basic-addon1"/>
-            <div class="input-group-append">
-                <button class="btn btn-success" type="button">Go</button>
+            <input type="text" className="form-control" placeholder="Find a member..." aria-label="" aria-describedby="basic-addon1"/>
+            <div className="input-group-append">
+                <button className="btn btn-success" type="button">Go</button>
             </div>
             
         </div>
         <br/>
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">My Projects</h4>
-                <p class="card-text">
+        <div className="card">
+            <div className="card-body">
+                <h4 className="card-title">My Projects</h4>
+                <p className="card-text">
                     get existing projects as a list
                 </p>
-                <a href="#!" class="btn btn-primary btn-block">Go to my projects</a>
+                <a href="#!" className="btn btn-primary btn-block">Go to my projects</a>
             </div>
         </div>
         <br/>
@@ -101,22 +97,23 @@ export default class Home extends Component {
             <h4>Create a project</h4>
             <div className="form-group">
                 <label for="formGroupExampleInput">Project Name</label>
-                <input type="text" onChange={this.handleNameChange.bind(this)} class="form-control" id="formGroupExampleInput" placeholder="Enter project name"/>
+                <input type="text" onChange={this.handleNameChange.bind(this)} className="form-control" id="formGroupExampleInput" placeholder="Enter project name"/>
             </div>
             <div className="form-group">
-                    <textarea rows = "5" cols = "60" name="bio" onChange={this.handleDescChange.bind(this)} 
+                    <label for="formGroupExampleInput">Description</label>
+                    <textarea rows = "5" cols = "60" name="description" onChange={this.handleDescChange.bind(this)} 
                     className="form-control" >
                         Write description here ...
                     </textarea>
                 </div>
 
                 <p>Characters Left: {this.state.chars_left}</p>
-            <button class="btn btn-success" onSubmit={() => this.createProjectSubmit()} type="submit">Submit</button>
+            <button className="btn btn-success" onSubmit={() => this.createProjectSubmit()} type="submit">Submit</button>
         </form>
         <br/>
-        <button class="btn btn-primary btn-block" onClick={() => this.projectList()} type="button">Join a new project</button>
+        <button className="btn btn-primary btn-block" onClick={() => this.projectList()} type="button">Join a new project</button>
         <br/>
-        <button class="btn btn-primary btn-block" onClick={() => this.addBio()} type="button">Add Bio</button>
+        <button className="btn btn-primary btn-block" onClick={() => this.addBio()} type="button">Add Bio</button>
         <br/>
             
 
