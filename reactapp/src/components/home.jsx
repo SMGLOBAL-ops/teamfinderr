@@ -5,6 +5,15 @@ const cookies = new Cookies();
 
 export default class Home extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+          description: 'Write description here ...'
+        };
+
+        this.handleDescChange = this.handleDescChange.bind(this);
+      }
+
     state = {
         name: '',
         description: '',
@@ -37,11 +46,11 @@ export default class Home extends Component {
     createProjectSubmit = (event) => {
         event.preventDefault();
 
-        const project = {
-            name: this.state.name,
-            description: this.state.description,
+        // const project = {
+        //     name: this.state.name,
+        //     description: this.state.description,
 
-        }
+        // }
 
         const options = {
             headers: {
@@ -55,7 +64,7 @@ export default class Home extends Component {
           console.log(res);
           console.log(res.data);
 
-          if(res.status==201){
+          if(res.status===201){
             console.log("Project added");
             this.props.history.push('/home');
           } else{
@@ -101,10 +110,9 @@ export default class Home extends Component {
             </div>
             <div className="form-group">
                     <label htmlFor="formGroupExampleInput">Description</label>
-                    <textarea rows = "5" cols = "60" name="description" onChange={this.handleDescChange.bind(this)} 
-                    className="form-control" >
-                        Write description here ...
-                    </textarea>
+                    <textarea rows = "5" cols = "60" name="description" value={this.state.description} onChange={this.handleDescChange} 
+                    className="form-control" />
+                     
                 </div>
 
                 <p>Characters Left: {this.state.chars_left}</p>

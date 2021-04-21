@@ -5,6 +5,15 @@ const cookies = new Cookies();
   
 export default class CreateProfile extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+          bio: 'Write bio here ...'
+        };
+
+        this.handleBioChange = this.handleBioChange.bind(this);
+      }
+
     state = {
         bio: '',
         chars_left: 255,
@@ -24,13 +33,14 @@ export default class CreateProfile extends Component {
         }
 
     handleSubmit = (event) => {
+
         event.preventDefault();
         
         console.log(this.state.bio)
 
-        const profile = {
-            bio: this.state.bio,
-        }
+        // const profile = {
+        //     bio: this.state.bio,
+        // }
 
         const options = {
             headers: {
@@ -46,7 +56,7 @@ export default class CreateProfile extends Component {
           console.log(res);
           console.log(res.data);
 
-          if(res.status==201){
+          if(res.status===201){
             console.log("Bio updated");
             this.props.history.push('/home');
           } else{
@@ -69,10 +79,8 @@ export default class CreateProfile extends Component {
                     (Max. 255 chars.)</p>
                
                 <div className="form-group">
-                    <textarea rows = "5" cols = "60" name="bio" onChange={this.handleBioChange.bind(this)} 
-                    className="form-control" >
-                        Write bio here ...
-                    </textarea>
+                    <textarea rows = "5" cols = "60" name="bio" value={this.state.bio} onChange={this.handleBioChange} 
+                    className="form-control" />
                 </div>
 
                 <p>Characters Left: {this.state.chars_left}</p>

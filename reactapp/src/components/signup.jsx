@@ -3,20 +3,20 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
-const API_HOST = 'http://localhost:8000';
+// const API_HOST = 'http://localhost:8000';
 
-let _csrfToken = null;
+// let _csrfToken = null;
 
-async function getCsrfToken() {
-    if (_csrfToken === null) {
-      const response = await fetch(`${API_HOST}/csrf/`, {
-        credentials: 'include',
-      });
-      const data = await response.json();
-      _csrfToken = data.csrfToken;
-    }
-    return _csrfToken;
-  }
+// async function getCsrfToken() {
+//     if (_csrfToken === null) {
+//       const response = await fetch(`${API_HOST}/csrf/`, {
+//         credentials: 'include',
+//       });
+//       const data = await response.json();
+//       _csrfToken = data.csrfToken;
+//     }
+//     return _csrfToken;
+//   }
 
 export default class SignUp extends Component {
 
@@ -58,13 +58,13 @@ export default class SignUp extends Component {
 
         //console.log(_csrfToken);
 
-        const user = {
-            username: this.state.username,
-            email: this.state.email,
-            password1: this.state.password1,
-            password2: this.state.password2
+        // const user = {
+        //     username: this.state.username,
+        //     email: this.state.email,
+        //     password1: this.state.password1,
+        //     password2: this.state.password2
 
-        }
+        // }
 
         const options = {
             headers: {
@@ -87,7 +87,7 @@ export default class SignUp extends Component {
           console.log(res);
           console.log(res.data);
 
-          if(res.status==201){
+          if(res.status===201){
             console.log("Registration successful");
             this.props.history.push('/sign-in');
           } else{

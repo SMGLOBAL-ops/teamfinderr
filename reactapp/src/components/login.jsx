@@ -34,9 +34,9 @@ export default class Login extends Component {
         this.setState({ password: event.target.value });
         }
 
-    async componentDidMount() {
-        //_csrfToken = await getCsrfToken();
-        }
+    // async componentDidMount() {
+    //     //_csrfToken = await getCsrfToken();
+    //     }
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -65,7 +65,7 @@ export default class Login extends Component {
           console.log(res);
           console.log(res.data);
 
-          if(res.status==200){
+          if(res.status===200){
             console.log("Log in success");
             this.props.history.push('/home');
           } else{
