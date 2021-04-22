@@ -1,76 +1,66 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import TutorialDataService from "../services/TutorialService";
+import MyProjectsListService from "../services/myProjectsListService";
 import { useTable } from "react-table";
 
+const MyProjectsList = (props) => {
+  const [myProjects, setMyProjects] = useState([]);
+  const [searchName, setSearchName] = useState("");
+  const myProjectsRef = useRef();
 
-const TutorialsList = (props) => {
-  const [tutorials, setTutorials] = useState([]);
-  const [searchTitle, setSearchTitle] = useState("");
-  const tutorialsRef = useRef();
-
-  tutorialsRef.current = tutorials;
+  myProjectsRef.current = myProjects;
 
   useEffect(() => {
-    retrieveTutorials();
+    retrieveMyProjects();
   }, []);
 
-  const onChangeSearchTitle = (e) => {
-    const searchTitle = e.target.value;
-    setSearchTitle(searchTitle);
+  const onChangeSearchName = (e) => {
+    const searchName = e.target.value;
+    setSearchName(searchName);
   };
 
-  const retrieveTutorials = () => {
-    TutorialDataService.getAll()
+  const retrieveMyProjects = () => {
+    MyProjectsListService.getAll()
       .then((response) => {
-        setTutorials(response.data);
+        setMyProjects(response.data);
       })
       .catch((e) => {
         console.log(e);
       });
   };
 
-  const refreshList = () => {
-    retrieveTutorials();
-  };
-
-  const removeAllTutorials = () => {
-    TutorialDataService.removeAll()
+  const findByName = () => {
+    MyProjectsListService.findByName(searchName)
       .then((response) => {
-        console.log(response.data);
-        refreshList();
+        setMyProjects(response.data);
       })
       .catch((e) => {
         console.log(e);
       });
   };
 
-  const findByTitle = () => {
-    TutorialDataService.findByTitle(searchTitle)
-      .then((response) => {
-        setTutorials(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+  function search(rows) {
+    return rows.filter(
+      (row) => row.name.toLowerCase().indexOf(searchName) > -1
+    );
+  }
+
+  const openMyProjects = (rowIndex) => {
+    const id = myProjectsRef.current[rowIndex].id;
+
+    props.history.push("/my-projects/" + id);
   };
 
-  const openTutorial = (rowIndex) => {
-    const id = tutorialsRef.current[rowIndex].id;
+  const deleteMyProjects = (rowIndex) => {
+    const id = myProjectsRef.current[rowIndex].id;
 
-    props.history.push("/tutorials/" + id);
-  };
-
-  const deleteTutorial = (rowIndex) => {
-    const id = tutorialsRef.current[rowIndex].id;
-
-    TutorialDataService.remove(id)
+    MyProjectsListService.remove(id)
       .then((response) => {
-        props.history.push("/tutorials");
+        props.history.push("/my-projects");
 
-        let newTutorials = [...tutorialsRef.current];
-        newTutorials.splice(rowIndex, 1);
+        let newmyProjects = [...myProjectsRef.current];
+        newmyProjects.splice(rowIndex, 1);
 
-        setTutorials(newTutorials);
+        setMyProjects(newmyProjects);
       })
       .catch((e) => {
         console.log(e);
@@ -80,19 +70,16 @@ const TutorialsList = (props) => {
   const columns = useMemo(
     () => [
       {
-        Header: "Title",
-        accessor: "title",
+        Header: "Name",
+        accessor: "name",
       },
       {
         Header: "Description",
         accessor: "description",
       },
       {
-        Header: "Status",
-        accessor: "published",
-        Cell: (props) => {
-          return props.value ? "Published" : "Pending";
-        },
+        Header: "Owner ID",
+        accessor: "members",
       },
       {
         Header: "Actions",
@@ -101,11 +88,11 @@ const TutorialsList = (props) => {
           const rowIdx = props.row.id;
           return (
             <div>
-              <span onClick={() => openTutorial(rowIdx)}>
+              <span onClick={() => openMyProjects(rowIdx)}>
                 <i className="far fa-edit action mr-2"></i>
               </span>
 
-              <span onClick={() => deleteTutorial(rowIdx)}>
+              <span onClick={() => deleteMyProjects(rowIdx)}>
                 <i className="fas fa-trash action"></i>
               </span>
             </div>
@@ -124,7 +111,7 @@ const TutorialsList = (props) => {
     prepareRow,
   } = useTable({
     columns,
-    data: tutorials,
+    data: myProjects,
   });
 
   return (
@@ -134,15 +121,15 @@ const TutorialsList = (props) => {
           <input
             type="text"
             className="form-control"
-            placeholder="Search by title"
-            value={searchTitle}
-            onChange={onChangeSearchTitle}
+            placeholder="Search by Name"
+            value={searchName}
+            onChange={onChangeSearchName}
           />
           <div className="input-group-append">
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onClick={findByTitle}
+              onClick={findByName}
             >
               Search
             </button>
@@ -181,14 +168,8 @@ const TutorialsList = (props) => {
           </tbody>
         </table>
       </div>
-
-      <div className="col-md-8">
-        <button className="btn btn-sm btn-danger" onClick={removeAllTutorials}>
-          Remove All
-        </button>
-      </div>
     </div>
   );
 };
 
-export default TutorialsList;
+export default MyProjectsList;

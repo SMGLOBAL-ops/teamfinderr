@@ -1,8 +1,11 @@
 import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 export default axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: "http://localhost:8000/api",
   headers: {
-    "Content-type": "application/json"
+    "Content-Type": "application/json",
+    "X-CSRFToken": cookies.get("csrftoken"),
   }
 });

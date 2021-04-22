@@ -19,12 +19,8 @@ import NavbarLoggedIn from './components/navbarloggedin';
 import NavbarLoggedOut from './components/navbarloggedout';
 import Logo from './components/logo';
 import BaseMessage from './components/basemessage';
- 
-//imports for projects table 
-
-import AddTutorial from "./components/AddTutorial";
-import Tutorial from "./components/Tutorial";
-import TutorialsList from "./components/TutorialsList";
+import MyProject from "./components/myproject";
+import MyProjectsList from "./components/myprojectlist";
 
 
 function App() {
@@ -63,9 +59,8 @@ function App() {
       </Switch>
 
       <Switch>
-        < Route path="/tutorials/:id"  component={NavbarLoggedIn} />
-        < Route exact path="/tutorials" component={NavbarLoggedIn}/>
-        <Route exact path="/add"  component={NavbarLoggedIn} />
+        <Route path="/my-projects/:id"  component={NavbarLoggedIn} />
+        <Route exact path="/my-projects" component={NavbarLoggedIn}/>
         <Route exact path='/' component={NavbarLoggedOut} />
         <Route path="/sign-in" component={NavbarLoggedOut} />
         <Route path="/sign-up" component={NavbarLoggedOut} />
@@ -82,9 +77,8 @@ function App() {
       <Switch>
         <div className="outer">
           <div className="inner">
-           < Route path="/tutorials/:id" component={Tutorial} />
-           < Route exact path="/tutorials" component={TutorialsList} />
-           <Route exact path="/add" component={AddTutorial} />
+            <Route path="/my-projects/:id" component={MyProject} />
+            <Route exact path="/my-projects" component={MyProjectsList} />
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={SignUp} />
             <Route path="/home" component={Home} />
