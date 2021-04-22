@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import bio1 from './bio1.png';
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
   
@@ -71,8 +72,10 @@ export default class CreateProfile extends Component {
         return (
             <form onSubmit={this.handleSubmit}>
 
-                <h3>Bio</h3>
-
+                <div class="card">
+                    <img class="card-img-top" src={bio1} alt=""/>
+                </div>
+                <br/>
                 <p>Please add a short bio for your profile here so 
                     that others can see what your skills and interests are! 
                     (Max. 255 chars.)</p>

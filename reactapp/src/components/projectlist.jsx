@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getProjects } from '../services/ProjectService'
+import img from './projects.png'
 import '../styles.css'; 
 
 import axios from "axios";
@@ -68,7 +69,11 @@ class ProjectListView extends Component {
       //console.log(`table is ${table}`)
 
       return (
-      <>
+      <>                
+        <div class="card">
+            <img class="card-img-top" src={img} alt=""/>
+        </div>
+
         <p>Showing {count} projects in the database</p>
         {listOfProjects}
        <table className="table">

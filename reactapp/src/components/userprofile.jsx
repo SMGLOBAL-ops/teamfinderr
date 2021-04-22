@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import imgp from './profile.png';
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -127,9 +128,8 @@ export default class UserProfileView extends Component {
         return (
         <>
         <div>
-
             <div class="card">
-                <img class="card-img-top" src="https://images.pexels.com/photos/1000445/pexels-photo-1000445.jpeg?auto=compress" alt="Card image cap"/>
+                <img class="card-img-top" src={imgp} alt=""/>
                 <div class="card-body">
                     <h4 class="card-title">Bio</h4>
                     <p class="card-text">
