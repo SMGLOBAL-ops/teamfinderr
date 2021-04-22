@@ -24,6 +24,7 @@ export default class UserProfileView extends Component {
      }
 
     componentDidMount = async () => {
+        //console.log("UserProfile calledddddd")
         await axios.get(`http://127.0.0.1:8000/api/v1/profiles/`,{ 
             headers: {
                 'Content-Type': 'application/json',
@@ -45,7 +46,7 @@ export default class UserProfileView extends Component {
             }
         })
         .then(res => {
-            console.log(res.data);
+            //console.log(res.data);
             this.setState({user:res.data});
             //console.log(`current state of user ${this.state.user}`);
             //console.log(`current state of user_id ${this.state.user.pk}`);
@@ -56,6 +57,15 @@ export default class UserProfileView extends Component {
         this.setState({userProfile:profileFiltered})
 
         
+    }
+
+    addBio(){
+        console.log("add bio")
+        //this.props.history.push('/create-profile')
+    }
+    editBio(){
+        console.log("edit bio")
+        //this.props.history.push('/edit-profile')
     }
 
     handleCategoryChange = (selectedCategory) => {
@@ -124,7 +134,8 @@ export default class UserProfileView extends Component {
                     <ul>
                         { this.state.userProfile.map(profile => <li>{profile.bio}</li>)}
                     </ul>
-                    <a href="#!" onClick={this.getProfiles} class="btn btn-primary">Edit- to Adams form</a>
+                    <a onClick={() => this.addBio()} class="btn btn-dark">Add Bio</a>
+                    <a onClick={() => this.editBio()} class="btn btn-dark">Edit Bio</a>
                 </div>
             </div>
 

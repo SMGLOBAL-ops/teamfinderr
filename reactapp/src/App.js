@@ -11,6 +11,7 @@ import UserProfileView from './components/userprofile'
 import Home from './components/home'
 import ProjectListView from './components/projectlist'
 import CreateProfile from './components/createprofile';
+import EditProfile from './components/createprofile';
 import NavbarLoggedIn from './components/navbarloggedin';
 import NavbarLoggedOut from './components/navbarloggedout';
 
@@ -25,11 +26,13 @@ function App() {
         <Route exact path='/' component={NavbarLoggedOut} />
         <Route path="/sign-in" component={NavbarLoggedOut} />
         <Route path="/sign-up" component={NavbarLoggedOut} />
+        <Route path="/project-list" component={NavbarLoggedOut} />
         <Route path="/home" component={NavbarLoggedIn} />
         <Route path="/password-change" component={NavbarLoggedIn} />
         <Route path="/user-profile" component={NavbarLoggedIn} />
         <Route path="/project-list" component={NavbarLoggedIn} />
         <Route path="/create-profile" component={NavbarLoggedIn} />
+        <Route path="/edit-profile" component={NavbarLoggedIn} />
       </Switch>
       
       <div className="outer">
@@ -43,6 +46,7 @@ function App() {
             <Route path="/user-profile" component={UserProfileView} />
             <Route path="/project-list" component={ProjectListView} />
             <Route path="/create-profile" component={CreateProfile} />
+            <Route path="/edit-profile" component={EditProfile} />
           </Switch>
         </div>
       </div>

@@ -12,6 +12,11 @@ export default class NavbarLoggedOut extends Component {
     event.preventDefault();
     this.props.history.push('/sign-up');
   }
+
+  redirectProject = event => {
+    event.preventDefault();
+    this.props.history.push('/project-list');
+  }
   
     render() {
         return (
@@ -25,6 +30,9 @@ export default class NavbarLoggedOut extends Component {
                     </li>
                   <li className="nav-item">
                     <div className="nav-link" onClick={this.redirectRegistration}>Register</div>
+                  </li>
+                  <li className="nav-item">
+                    <div className="nav-link" onClick={this.redirectProject}>Projects</div>
                   </li>
                 </ul>
               </div>

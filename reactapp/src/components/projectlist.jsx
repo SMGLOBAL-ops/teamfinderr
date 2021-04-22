@@ -9,52 +9,85 @@ const cookies = new Cookies();
 class ProjectListView extends Component {
 
     state = { 
-      projects: {}
+      projects: [],
      }; 
 
-     fetchProjects = async () => {
-      const { data } = await axios.get(
-          "http://127.0.0.1:8000/api/v1/projects/"
-      );
-      console.log(data);
-      this.setState({ projects: data})
-      return { data };
-    };
+     componentDidMount = async () => {
+        console.log("Projects calledddddd")
+        await axios.get(`http://127.0.0.1:8000/api/v1/projects/`,{ 
+          headers: {
+              'Content-Type': 'application/json',
+              "X-CSRFToken": cookies.get("csrftoken"),
+          }
+        })
+        .then(res => {
+              //console.log(res);
+              //console.log(res.data);
+              const projects = res.data;
+              this.setState({projects});
+              console.log(`current state of projects ${this.state.projects[0]}`);
+          });
 
-     handleDelete = (project) => {
-       const projects = this.state.projects.filter(p => p._id !== project._id); 
-       this.setState({ projects }); 
-     }; 
+    //  fetchProjects = () => {
+    //   const { data } = await axios.get(
+    //       "http://127.0.0.1:8000/api/v1/projects/"
+    //   );
+    //   console.log(data);
+    //   this.setState({ projects: data})
+    //   return { data };
+    // };
 
+        // handleDelete = (project) => {
+        //   const projects = this.state.projects.filter(p => p._id !== project._id); 
+        //   this.setState({ projects }); 
+        // }; 
+    
+    }
     
     render() { 
-      const { length: count }  = this.state.projects; 
+      const { length: count }  = Object.keys(this.state.projects);
   
       if (count === 0) return <p>There are no projects available in the database!</p>
-      
+      console.log(`count is ${count}`)
+
+      const projects = this.state.projects;
+      //const table  = 
+      let listOfProjects = " "; 
+      for (let i of projects){
+        console.log(`i is ${i}`)
+      }
+
+      //console.log(`list of projects is ${listOfProjects}`)
+      // let listOfSkills;
+        // for (let i of skills){
+        //     listOfSkills = i.skills.map((x)=>
+        //         <li>{x}</li>
+        //     );
+        // }
+
+      //console.log(`table is ${table}`)
+
       return (
       <>
         <p>Showing {count} projects in the database</p>
+        {listOfProjects}
        <table className="table">
         <thead>
           <tr>
             <th>Project Name</th>
             <th>Description</th>
-            <th></th>
+            <th>
+            <tbody>
+            
+          
+            </tbody>
+            </th>
           </tr>
         </thead>
-        <tbody>
-          { this.state.projects.map(project => <tr key={project._id}>
-            <td>{project.title}</td>
-            <td>{project.description}</td>
-            <td>{project.members}</td>
-            <td>{project.roles}</td>
-            <td><button onClick={() => console.log("function to join project to User profile of projects")} className="btn btn-success btn-sm">Join Project</button></td>
-            <td><button onClick={() => this.handleDelete(project)} className="btn btn-danger btn-sm m-2">Delete</button></td>
-          </tr>)}
-          
-        </tbody>
+        
       </table>
+
+      
       </>
       )}
   }
@@ -116,3 +149,15 @@ export default class ProjectListView extends Component {
     }
 }
 */
+
+{/* <tbody>
+          { this.state.projects.map(project => <tr key={project._id}>
+            <td>{project.title}</td>
+            <td>{project.description}</td>
+            <td>{project.members}</td>
+            <td>{project.roles}</td>
+            <td><button onClick={() => console.log("function to join project to User profile of projects")} className="btn btn-success btn-sm">Join Project</button></td>
+            <td><button onClick={() => this.handleDelete(project)} className="btn btn-danger btn-sm m-2">Delete</button></td>
+          </tr>)}
+          
+        </tbody> */}
