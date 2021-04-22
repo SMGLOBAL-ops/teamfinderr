@@ -92,3 +92,7 @@ html,
 ul {
   list-style-type: none; /* Remove bullets */
 }
+
+.btn {
+  padding: 10px;
+}

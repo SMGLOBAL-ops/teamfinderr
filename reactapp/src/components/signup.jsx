@@ -69,12 +69,9 @@ export default class SignUp extends Component {
         const options = {
             headers: {
                 'Content-Type': 'application/json',
-                //'Cookie' : `csrftoken=${_csrfToken}`
                 "X-CSRFToken": cookies.get("csrftoken"),
             }
           };
-
-        //console.log(user)
 
         axios.post(`http://127.0.0.1:8000/api/v1/dj-rest-auth/registration/`, 
         { 
@@ -90,14 +87,11 @@ export default class SignUp extends Component {
           if(res.status===201){
             console.log("Registration successful");
             this.props.history.push('/sign-in');
-          } else{
-            console.log("Registration failed. Credential conditions not met.")
           }
         }).catch((err) => {
-            console.log(err);
+            alert("Registration failed. Credential conditions not met.")
+            console.log(`Caught: ${err}`);
             this.setState({error: "Credential conditions not met."})
-
-        
         });
       }
 
@@ -105,8 +99,7 @@ export default class SignUp extends Component {
     render() {
         return (
             <>
-            <form onSubmit={this.handleSubmit}
-            >
+            <form onSubmit={this.handleSubmit}>
                 <h3 className="Form-register" >Register</h3>
 
                 <div className="form-group">

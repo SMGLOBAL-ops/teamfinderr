@@ -6,12 +6,13 @@ import logo from './logo.jpeg';
 
 import Login from "./components/login";
 import SignUp from "./components/signup";
-import PasswordChange from "./components/passwordchange"
-import UserProfileView from './components/userprofile'
-import Home from './components/home'
-import ProjectListView from './components/projectlist'
+import PasswordChange from "./components/passwordchange";
+import UserProfileView from './components/userprofile';
+import Home from './components/home';
+import ProjectListView from './components/projectlist';
 import CreateProfile from './components/createprofile';
-import EditProfile from './components/createprofile';
+import EditProfile from './components/editprofile';
+import PasswordReset from './components/passwordreset';
 import NavbarLoggedIn from './components/navbarloggedin';
 import NavbarLoggedOut from './components/navbarloggedout';
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/project-list" component={NavbarLoggedOut} />
         <Route path="/home" component={NavbarLoggedIn} />
         <Route path="/password-change" component={NavbarLoggedIn} />
+        <Route path="/password-reset" component={NavbarLoggedOut} />
         <Route path="/user-profile" component={NavbarLoggedIn} />
         <Route path="/project-list" component={NavbarLoggedIn} />
         <Route path="/create-profile" component={NavbarLoggedIn} />
@@ -43,6 +45,7 @@ function App() {
             <Route path="/sign-up" component={SignUp} />
             <Route path="/home" component={Home} />
             <Route path="/password-change" component={PasswordChange} />
+            <Route path="/password-reset" component={PasswordReset} />
             <Route path="/user-profile" component={UserProfileView} />
             <Route path="/project-list" component={ProjectListView} />
             <Route path="/create-profile" component={CreateProfile} />
