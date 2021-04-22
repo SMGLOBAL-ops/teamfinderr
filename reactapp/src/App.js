@@ -15,6 +15,7 @@ import ProjectListView from './components/projectlist';
 import CreateProfile from './components/createprofile';
 import EditProfile from './components/editprofile';
 import PasswordReset from './components/passwordreset';
+import ProjectRequest from './components/projectrequest.jsx';
 import NavbarLoggedIn from './components/navbarloggedin';
 import NavbarLoggedOut from './components/navbarloggedout';
 import Logo from './components/logo';
@@ -76,6 +77,7 @@ function App() {
         <Route path="/project-list" component={NavbarLoggedIn} />
         <Route path="/create-profile" component={NavbarLoggedIn} />
         <Route path="/edit-profile" component={NavbarLoggedIn} />
+        <Route path="/project-request" component={NavbarLoggedIn} />
       </Switch>
 
 
@@ -94,10 +96,15 @@ function App() {
             <Route path="/project-list" component={ProjectListView} />
             <Route path="/create-profile" component={CreateProfile} />
             <Route path="/edit-profile" component={EditProfile} />
+            <Route path="/project-request" component={ProjectRequest} />
           </div>
         </div>
       </Switch>
 
+      <Route
+        path="/project-request/:id"
+        render={props => <ProjectRequest {...props} />}
+      />
 
     </div></Router>
   );

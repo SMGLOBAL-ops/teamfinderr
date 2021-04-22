@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import { getProjects } from '../services/ProjectService'
 import img from './projects.png'
-import '../styles.css'; 
+import '../styles.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom"; 
 
 import axios from "axios";
 import Cookies from "universal-cookie";
@@ -11,10 +18,18 @@ class ProjectListView extends Component {
 
     state = { 
       projects: [],
+      profiles:[],
+      user: "",
+      userProfile: [],
+      category: [],
+      name:"",
+      message:"",
+      currentProject:[],
      }; 
 
      componentDidMount = async () => {
         console.log("Projects calledddddd")
+
         await axios.get(`http://127.0.0.1:8000/api/v1/projects/`,{ 
           headers: {
               'Content-Type': 'application/json',
@@ -22,16 +37,90 @@ class ProjectListView extends Component {
           }
         })
         .then(res => {
-              //console.log(res);
-              //console.log(res.data);
               const projects = res.data;
               this.setState({projects});
-              console.log(`current state of projects ${JSON.stringify(this.state.projects)}`);
+              //console.log(`current state of projects ${JSON.stringify(this.state.projects)}`);
           });
+        
+        await axios.get(`http://127.0.0.1:8000/api/v1/profiles/`,{ 
+          headers: {
+              'Content-Type': 'application/json',
+              "X-CSRFToken": cookies.get("csrftoken"),
+          }
+        })
+        .then(res => {
+            const profiles = res.data;
+            this.setState({profiles});
+            //console.log(`current state of profiles ${this.state.profiles}`);
+        });
+
+        await axios.get(`http://127.0.0.1:8000/api/v1/dj-rest-auth/user/`,{ 
+            headers: {
+                'Content-Type': 'application/json',
+                "X-CSRFToken": cookies.get("csrftoken"),
+            }
+        })
+        .then(res => {
+            //console.log(res.data);
+            this.setState({user:res.data});
+            //console.log(`current state of user ${this.state.user}`);
+            //console.log(`current state of user_id ${this.state.user.pk}`);
+        });
+
+        var profileFiltered = this.state.profiles.filter(profile=> profile.user_id===this.state.user.pk)
+        //console.log(`profile filtered ${profileFiltered}`)
+        this.setState({userProfile:profileFiltered})
+
     }
 
     sendRequest = async (id) => {
       console.log(`id is passed ${id}`)
+      const message = `Hi, I am interested in joining your project`
+      const newArray = this.state.userProfile.map(x=>x.skills);
+
+      const options = {
+        headers: {
+            'Content-Type': 'application/json',
+            "X-CSRFToken": cookies.get("csrftoken"),
+        }
+      };
+      console.log(`project pk ${id}`)
+      console.log(`userProfile ${JSON.stringify(this.state.userProfile)}`)
+      console.log(`userProfile.skills ${JSON.stringify(newArray[0].toString())}`)
+      
+      //const role = name:"", category: "relationship";
+
+      await axios.get(`http://127.0.0.1:8000/api/v1/projects/${id}/`,{ 
+          headers: {
+              'Content-Type': 'application/json',
+              "X-CSRFToken": cookies.get("csrftoken"),
+          }
+        })
+        .then(res => {
+              const project = res.data;
+              this.setState({currentProject:project});
+              console.log(`current project ${JSON.stringify(this.state.currentProject)}`);
+          });
+
+      await axios.post(`http://127.0.0.1:8000/api/v1/projects/${id}/members/`, {user: this.state.userProfile, message: message, role:{name:"Python", category: "relationship"}}, options)
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+
+          if(res.status===200||201){
+            alert("Request has been successfully made")
+            console.log("Submitted request successfully");
+          } else{
+            console.log("Could not request.")
+            console.log(res.status)
+          }
+        }).catch((err) => {
+            alert("Could not request. Please select category and input name")
+            console.log("caught", err);
+            this.setState({error: "Could not add request."})
+        });
+
+
     }
     
     render() { 
@@ -71,7 +160,7 @@ class ProjectListView extends Component {
       //console.log(`table is ${table}`)
 
       return (
-      <>                
+      <Router>                
         <div class="card">
             <img class="card-img-top" src={img} alt=""/>
         </div>
@@ -92,8 +181,7 @@ class ProjectListView extends Component {
           </tbody>
       </table>
 
-      
-      </>
+      </Router>
       )}
   }
    
