@@ -24,6 +24,12 @@ export default class NavbarLoggedOut extends Component{
     this.props.history.push('/project-list');
   }
 
+  redirectProjectsRequest = event => {
+    event.preventDefault();
+    this.props.history.push('/project-request');
+  }
+
+
   handleLogout = (event) => {
     event.preventDefault();
 
@@ -71,6 +77,9 @@ export default class NavbarLoggedOut extends Component{
               </li>
               <li className="nav-item">
               <div className="nav-link" onClick={this.redirectProjects}>Projects</div>
+              </li>
+              <li className="nav-item">
+              <div className="nav-link" onClick={this.redirectProjectsRequest}>Project Request</div>
               </li>
               <li className="nav-item">
               <div className="nav-link" onClick={this.handleLogout}>Logout</div>
