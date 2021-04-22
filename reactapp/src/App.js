@@ -1,8 +1,7 @@
 import React from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import logo from './logo.jpeg';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Login from "./components/login";
 import SignUp from "./components/signup";
@@ -14,14 +13,21 @@ import CreateProfile from './components/createprofile';
 import EditProfile from './components/createprofile';
 import NavbarLoggedIn from './components/navbarloggedin';
 import NavbarLoggedOut from './components/navbarloggedout';
+import Logo from './components/logo';
+import BaseMessage from './components/basemessage';
 
 function App() {
   return (<Router>
     <div className="App">
-      <div>
-      <img className="logo" src={logo} alt=""/>
-      </div>
-    
+
+      <Switch>
+        <Route exact path='/' component={Logo} />
+      </Switch>
+
+      <Switch>
+        <Route exact path='/' component={BaseMessage} />
+      </Switch>
+
       <Switch>
         <Route exact path='/' component={NavbarLoggedOut} />
         <Route path="/sign-in" component={NavbarLoggedOut} />
@@ -33,11 +39,11 @@ function App() {
         <Route path="/create-profile" component={NavbarLoggedIn} />
         <Route path="/edit-profile" component={NavbarLoggedIn} />
       </Switch>
-      
-      <div className="outer">
-        <div className="inner">
-          <Switch>
-            <Route exact path='/' component={Login} />
+
+
+      <Switch>
+        <div className="outer">
+          <div className="inner">
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={SignUp} />
             <Route path="/home" component={Home} />
@@ -46,9 +52,11 @@ function App() {
             <Route path="/project-list" component={ProjectListView} />
             <Route path="/create-profile" component={CreateProfile} />
             <Route path="/edit-profile" component={EditProfile} />
-          </Switch>
+          </div>
         </div>
-      </div>
+      </Switch>
+
+
     </div></Router>
   );
 }
