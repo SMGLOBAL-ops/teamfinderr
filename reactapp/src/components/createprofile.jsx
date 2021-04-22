@@ -59,11 +59,10 @@ export default class CreateProfile extends Component {
           if(res.status===201 || 200){
             console.log("Bio updated");
             this.props.history.push('/home');
-          } else{
-            console.log("Bio contains too many characters.")
           }
         }).catch((err) => {
-            console.log(err);
+            alert("Bio contains too many characters.")
+            console.log("caught", err);
             this.setState({error: "Bio contains too many characters."})
         });
       }
