@@ -17,8 +17,24 @@ export default class EditProfile extends Component {
     state = {
         bio: '',
         chars_left: 255,
-        error: ''
+        error: '',
+        user: ''
       }
+
+    componentDidMount = async() => {
+        await axios.get(`http://127.0.0.1:8000/api/v1/dj-rest-auth/user/`,{ 
+            headers: {
+                'Content-Type': 'application/json',
+                "X-CSRFToken": cookies.get("csrftoken"),
+            }
+        })
+        .then(res => {
+            //console.log(res.data);
+            this.setState({user:res.data});
+            //console.log(`current state of user ${this.state.user}`);
+            //console.log(`current state of user_id ${this.state.user.pk}`);
+        });
+    }
 
     redirectHome = event => {
         event.preventDefault();
@@ -51,19 +67,19 @@ export default class EditProfile extends Component {
 
         console.log(options.headers["X-CSRFToken"])
 
-        axios.put(`http://127.0.0.1:8000/api/v1/profiles/`, { bio: this.state.bio }, options)
+        axios.put(`http://127.0.0.1:8000/api/v1/profiles/${this.state.user.pk}/`, { bio: this.state.bio }, options)
         .then(res => {
           console.log(res);
           console.log(res.data);
 
           if(res.status===201 || 200){
+            alert("Bio updated");
             console.log("Bio updated");
-            this.props.history.push('/home');
-          } else{
-            console.log("Bio contains too many characters.")
+            this.props.history.push('/user-profile');
           }
         }).catch((err) => {
-            console.log(err);
+            alert("Bio contains too many characters.")
+            console.log("caught", err);
             this.setState({error: "Bio contains too many characters."})
         });
       }
