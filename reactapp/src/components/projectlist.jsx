@@ -25,39 +25,41 @@ class ProjectListView extends Component {
               //console.log(res.data);
               const projects = res.data;
               this.setState({projects});
-              console.log(`current state of projects ${this.state.projects[0]}`);
+              console.log(`current state of projects ${JSON.stringify(this.state.projects)}`);
           });
+    }
 
-    //  fetchProjects = () => {
-    //   const { data } = await axios.get(
-    //       "http://127.0.0.1:8000/api/v1/projects/"
-    //   );
-    //   console.log(data);
-    //   this.setState({ projects: data})
-    //   return { data };
-    // };
-
-        // handleDelete = (project) => {
-        //   const projects = this.state.projects.filter(p => p._id !== project._id); 
-        //   this.setState({ projects }); 
-        // }; 
-    
+    sendRequest = async (id) => {
+      console.log(`id is passed ${id}`)
     }
     
     render() { 
       const { length: count }  = Object.keys(this.state.projects);
   
       if (count === 0) return <p>There are no projects available in the database!</p>
-      console.log(`count is ${count}`)
+      //console.log(`count is ${count}`)
 
       const projects = this.state.projects;
       //const table  = 
-      let listOfProjects = " "; 
-      for (let i of projects){
-        console.log(`i is ${i}`)
-      }
+      console.log(`projects are ${projects}`)
 
-      //console.log(`list of projects is ${listOfProjects}`)
+      let listOfProjects = projects.map(project => 
+      <tr key={project.id}>
+          <td>{project.name}</td>
+          <td>{project.description}</td>
+          <td>{project.members}</td>
+          <td><button onClick={()=>this.sendRequest(project.id)} className="btn btn-success btn-sm">Join</button></td>
+        </tr>
+      )
+
+      // for (let i of projects){
+      //   listOfProjects = i.map((x)=>
+      //     <li>{x.name}</li>
+      //   );
+      // }
+
+
+      console.log(`list of projects is ${listOfProjects}`)
       // let listOfSkills;
         // for (let i of skills){
         //     listOfSkills = i.skills.map((x)=>
@@ -70,21 +72,19 @@ class ProjectListView extends Component {
       return (
       <>
         <p>Showing {count} projects in the database</p>
-        {listOfProjects}
+        
        <table className="table">
         <thead>
           <tr>
-            <th>Project Name</th>
+            <th>Project</th>
             <th>Description</th>
-            <th>
-            <tbody>
-            
-          
-            </tbody>
-            </th>
+            <th>Member's id</th>
+            <th>Join</th>
           </tr>
         </thead>
-        
+          <tbody>
+              {listOfProjects}
+          </tbody>
       </table>
 
       
