@@ -23,7 +23,7 @@ export default class Home extends Component {
       }
 
     componentDidMount = async () => {
-        //console.log("UserProfile calledddddd")
+        console.log("Home calledddddd")
         await axios.get(`http://127.0.0.1:8000/api/v1/profiles/`,{ 
             headers: {
                 'Content-Type': 'application/json',
@@ -71,15 +71,15 @@ export default class Home extends Component {
         this.props.history.push('/create-profile')
     }
 
-    handleDescChange = event => {
-        this.setState({ description: event.target.value });
-        this.setState({
+    handleDescChange = async (event) => {
+        await this.setState({ description: event.target.value });
+        await this.setState({
             chars_left: 500 - event.target.value.length
         });
         }
 
-    handleNameChange = event => {
-        this.setState({ name: event.target.value });
+    handleNameChange = async (event) => {
+        await this.setState({ name: event.target.value });
         }
 
     handleProjectSubmit = async (event) => {
@@ -143,7 +143,7 @@ export default class Home extends Component {
             </div>
         </div>
         <br/>
-        <form onSubmit={() => this.handleProjectSubmit()}>
+        <form onSubmit={this.handleProjectSubmit}>
             <h4>Create a project</h4>
             <div className="form-group">
                 <label htmlFor="formGroupExampleInput">Project Name</label>
