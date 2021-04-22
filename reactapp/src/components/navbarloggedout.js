@@ -26,7 +26,7 @@ export default class NavbarLoggedOut extends Component {
               <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul className="navbar-nav ml-auto">
                   <li className="nav-item">
-                    <li className="nav-link" onClick={this.redirectLogin}>Login</li>
+                    <div className="nav-link" onClick={this.redirectLogin}>Login</div>
                     </li>
                   <li className="nav-item">
                     <div className="nav-link" onClick={this.redirectRegistration}>Register</div>

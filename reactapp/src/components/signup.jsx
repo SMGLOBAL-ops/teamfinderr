@@ -138,7 +138,7 @@ export default class SignUp extends Component {
                 </div>
                 <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
                 <p className="forgot-password text-right">
-                   Already registered? <button btn-primary onClick={this.redirectLoginPage} >Log in</button>
+                   Already registered? <button className="btn-primary" onClick={this.redirectLoginPage} >Log in</button>
                 </p>
             </form>
             </>

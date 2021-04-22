@@ -26,7 +26,6 @@ function App() {
         <Route exact path='/' component={NavbarLoggedOut} />
         <Route path="/sign-in" component={NavbarLoggedOut} />
         <Route path="/sign-up" component={NavbarLoggedOut} />
-        <Route path="/project-list" component={NavbarLoggedOut} />
         <Route path="/home" component={NavbarLoggedIn} />
         <Route path="/password-change" component={NavbarLoggedIn} />
         <Route path="/user-profile" component={NavbarLoggedIn} />

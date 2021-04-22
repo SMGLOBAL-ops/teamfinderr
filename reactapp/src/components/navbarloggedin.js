@@ -29,8 +29,8 @@ export default class NavbarLoggedOut extends Component{
             "X-CSRFToken": cookies.get("csrftoken"),
         }
       };
-
-    axios.post(`http://127.0.0.1:8000/api/v1/dj-rest-auth/logout/`, options)
+    console.log(cookies.get("csrftoken"))
+    axios.post(`http://127.0.0.1:8000/api/v1/dj-rest-auth/logout/`,{   },options)
     .then(res => {
       console.log(res);
       console.log(res.data);
@@ -57,16 +57,16 @@ export default class NavbarLoggedOut extends Component{
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <li className="nav-link" onClick={this.redirectHome}>Home</li>
+                <div className="nav-link" onClick={this.redirectHome}>Home</div>
               </li>
                 <li className="nav-item">
-                <li className="nav-link" onClick={this.redirectProfile}>Profile</li>
+                <div className="nav-link" onClick={this.redirectProfile}>Profile</div>
                 </li>
               <li className="nav-item">
-              <li className="nav-link" onClick={this.redirectProjects}>Projects</li>
+              <div className="nav-link" onClick={this.redirectProjects}>Projects</div>
               </li>
               <li className="nav-item">
-              <li className="nav-link" onClick={this.handleLogout}>Logout</li>
+              <div className="nav-link" onClick={this.handleLogout}>Logout</div>
               </li>
 
             </ul>
