@@ -53,15 +53,14 @@ export default class UserProfileView extends Component {
 
         var profileFiltered = this.state.profiles.filter(profile=> profile.user_id==this.state.user.pk)
         //console.log(`profile filtered ${profileFiltered}`)
-        await this.setState({userProfile:profileFiltered})
-        //console.log(`User profile is ${this.state.userProfile}`)
+        this.setState({userProfile:profileFiltered})
+
         
     }
 
     handleCategoryChange = (selectedCategory) => {
         this.setState({ category: selectedCategory.target.value });
-        //console.log('Category selected:', selectedCategory)
-        //console.log('Category selected:', selectedCategory.value)
+
         console.log(`e-value ${selectedCategory.target.value}`)
         }
 
@@ -84,7 +83,7 @@ export default class UserProfileView extends Component {
             }
           };
         
-        //console.log(`calleddddd ${this.state.user.pk}`)
+
         await axios.post(`http://127.0.0.1:8000/api/v1/profiles/${this.state.user.pk}/skills/`, { category: this.state.category, name: this.state.name }, options)
         .then(res => {
           console.log(res);
@@ -92,35 +91,26 @@ export default class UserProfileView extends Component {
 
           if(res.status!==404){
             console.log("Skill added");
-            //this.props.history.push('/user-profile');
-            //this.setState({message:"A new skill has been added"});
+
           } else{
             console.log("Could not add skill.")
             console.log(res.status)
           }
         });
-        /*.then(() => {
-            console.log(this.state)
-            if (this.state.error===""){
-                this.props.history.push('/home');
-            }
-        });
-        */
+  
       }
 
     render() { 
-        //const { selectedCategory } = this.state.category;
+
         const message = this.state.message;
         const skills = this.state.userProfile;
-        //console.log(`skills is ${skills[0].skills}`)
+
         let listOfSkills;
         for (let i of skills){
             listOfSkills = i.skills.map((x)=>
                 <li>{x}</li>
             );
         }
-
-        //console.log(listOfSkills)
         return (
         <>
         <div>

@@ -107,7 +107,7 @@ export default class SignUp extends Component {
             <>
             <form onSubmit={this.handleSubmit}
             >
-                <h3>Register</h3>
+                <h3 className="Form-register" >Register</h3>
 
                 <div className="form-group">
                     <label>Username</label>

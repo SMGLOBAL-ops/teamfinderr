@@ -2,21 +2,31 @@ import React, { Component } from "react";
 import { getProjects } from '../services/ProjectService'
 import '../styles.css'; 
 
-//import axios from "axios";
-//import Cookies from "universal-cookie";
-//const cookies = new Cookies();
+import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 class ProjectListView extends Component {
-    state = { 
-      projects: getProjects()
 
+    state = { 
+      projects: {}
      }; 
+
+     fetchProjects = async () => {
+      const { data } = await axios.get(
+          "http://127.0.0.1:8000/api/v1/projects/"
+      );
+      console.log(data);
+      this.setState({ projects: data})
+      return { data };
+    };
+
      handleDelete = (project) => {
        const projects = this.state.projects.filter(p => p._id !== project._id); 
        this.setState({ projects }); 
      }; 
 
-
+    
     render() { 
       const { length: count }  = this.state.projects; 
   
@@ -51,8 +61,6 @@ class ProjectListView extends Component {
    
   export default ProjectListView;
   
-  
-
 
 /*
   

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import logo from './logo.jpeg';
 
 import Login from "./components/login";
@@ -11,8 +11,8 @@ import UserProfileView from './components/userprofile'
 import Home from './components/home'
 import ProjectListView from './components/projectlist'
 import CreateProfile from './components/createprofile';
-
-
+import NavbarLoggedIn from './components/navbarloggedin';
+import NavbarLoggedOut from './components/navbarloggedout';
 
 function App() {
   return (<Router>
@@ -20,33 +20,18 @@ function App() {
       <div>
       <img className="logo" src={logo} alt=""/>
       </div>
-      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-        <div className="container">
-          <Link className="navbar-brand" to={"/sign-in"}>TeamFound inc.</Link>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to={"/home"}>Home</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/sign-in"}>Sign in</Link>
-                </li>
-                <li className="nav-item">
-                <Link className="nav-link" to={"/user-profile"}>User</Link>
-                </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/sign-up"}>Sign up</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/project-list"}>Projects</Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div>
-        </div>
-      </nav>
-
+    
+      <Switch>
+        <Route exact path='/' component={NavbarLoggedOut} />
+        <Route path="/sign-in" component={NavbarLoggedOut} />
+        <Route path="/sign-up" component={NavbarLoggedOut} />
+        <Route path="/home" component={NavbarLoggedIn} />
+        <Route path="/password-change" component={NavbarLoggedIn} />
+        <Route path="/user-profile" component={NavbarLoggedIn} />
+        <Route path="/project-list" component={NavbarLoggedIn} />
+        <Route path="/create-profile" component={NavbarLoggedIn} />
+      </Switch>
+      
       <div className="outer">
         <div className="inner">
           <Switch>

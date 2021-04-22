@@ -30,4 +30,3 @@ export function getProjects() {
 export function getProject(id) {
   return projects.find(p => p._id === id);
 }
-

@@ -56,7 +56,7 @@ export default class CreateProfile extends Component {
           console.log(res);
           console.log(res.data);
 
-          if(res.status===201){
+          if(res.status===201 || 200){
             console.log("Bio updated");
             this.props.history.push('/home');
           } else{
