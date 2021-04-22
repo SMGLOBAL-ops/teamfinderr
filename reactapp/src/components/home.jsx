@@ -16,9 +16,48 @@ export default class Home extends Component {
 
     state = {
         name: '',
+        profiles:[],
+        userProfile: [],
         description: '',
         chars_left: 500,
       }
+
+    componentDidMount = async () => {
+        //console.log("UserProfile calledddddd")
+        await axios.get(`http://127.0.0.1:8000/api/v1/profiles/`,{ 
+            headers: {
+                'Content-Type': 'application/json',
+                "X-CSRFToken": cookies.get("csrftoken"),
+            }
+        })
+        .then(res => {
+            //console.log(res);
+            //console.log(res.data);
+            const profiles = res.data;
+            this.setState({profiles});
+            console.log(`current state of profiles ${this.state.profiles}`);
+        });
+
+        await axios.get(`http://127.0.0.1:8000/api/v1/dj-rest-auth/user/`,{ 
+            headers: {
+                'Content-Type': 'application/json',
+                "X-CSRFToken": cookies.get("csrftoken"),
+            }
+        })
+        .then(res => {
+            //console.log(res.data);
+            this.setState({user:res.data});
+            //console.log(`current state of user ${this.state.user}`);
+            //console.log(`current state of user_id ${this.state.user.pk}`);
+        });
+
+        var profileFiltered = this.state.profiles.filter(profile=> profile.user_id==this.state.user.pk)
+        //console.log(`profile filtered ${profileFiltered}`)
+        this.setState({userProfile:profileFiltered})
+
+        
+    }
+
 
     handleClick() {
         this.props.history.push('/sign-in');
@@ -43,14 +82,14 @@ export default class Home extends Component {
         this.setState({ name: event.target.value });
         }
 
-    createProjectSubmit = (event) => {
+    handleProjectSubmit = async (event) => {
         event.preventDefault();
 
-        // const project = {
-        //     name: this.state.name,
-        //     description: this.state.description,
+        const user = {
+            name: this.state.name,
+            description: this.state.description,
 
-        // }
+        }
 
         const options = {
             headers: {
@@ -59,20 +98,22 @@ export default class Home extends Component {
             }
           };
 
-        axios.post(`http://127.0.0.1:8000/api/v1/projects/`, { name: this.state.name, description: this.state.description }, options)
+        await axios.post(`http://127.0.0.1:8000/api/v1/projects/`, { name: this.state.name, description: this.state.description }, options)
         .then(res => {
           console.log(res);
           console.log(res.data);
 
-          if(res.status===201){
+          if(res.status!==404){
+            //this.props.history.push('/home');
             console.log("Project added");
-            this.props.history.push('/home');
           } else{
             console.log("Project not added.")
+            console.log(res.status)
           }
         }).catch((err) => {
+            alert("Project not added")
             console.log(err);
-            this.setState({error: "Project not added."})
+            this.setState({error: "Project not added"})
         });
       }
     
@@ -102,21 +143,21 @@ export default class Home extends Component {
             </div>
         </div>
         <br/>
-        <form>
+        <form onSubmit={() => this.handleProjectSubmit()}>
             <h4>Create a project</h4>
             <div className="form-group">
                 <label htmlFor="formGroupExampleInput">Project Name</label>
-                <input type="text" onChange={this.handleNameChange.bind(this)} className="form-control" id="formGroupExampleInput" placeholder="Enter project name"/>
+                <input type="text" onChange={this.handleNameChange} className="form-control" id="formGroupExampleInput" placeholder="Enter project name"/>
             </div>
             <div className="form-group">
                     <label htmlFor="formGroupExampleInput">Description</label>
-                    <textarea rows = "5" cols = "60" name="description" value={this.state.description} onChange={this.handleDescChange} 
+                    <textarea rows = "5" cols = "60" name="description" description={this.state.description} onChange={this.handleDescChange} 
                     className="form-control" />
                      
                 </div>
 
                 <p>Characters Left: {this.state.chars_left}</p>
-            <button className="btn btn-success" onSubmit={() => this.createProjectSubmit()} type="submit">Submit</button>
+            <button className="btn btn-success" type="submit">Submit</button>
         </form>
         <br/>
         <button className="btn btn-primary btn-block" onClick={() => this.projectList()} type="button">Join a new project</button>

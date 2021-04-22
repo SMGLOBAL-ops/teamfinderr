@@ -31,9 +31,6 @@ export default class NavbarLoggedOut extends Component {
                   <li className="nav-item">
                     <div className="nav-link" onClick={this.redirectRegistration}>Register</div>
                   </li>
-                  <li className="nav-item">
-                    <div className="nav-link" onClick={this.redirectProject}>Projects</div>
-                  </li>
                 </ul>
               </div>
             </div>
