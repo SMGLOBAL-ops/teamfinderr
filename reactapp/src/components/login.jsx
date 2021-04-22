@@ -19,7 +19,7 @@ export default class Login extends Component {
 
     redirectForgotPassword = event => {
         event.preventDefault();
-        this.props.history.push('/password-change')
+        this.props.history.push('/password-reset')
     }
 
     handleUsernameChange = event => {
@@ -53,7 +53,6 @@ export default class Login extends Component {
         const options = {
             headers: {
                 'Content-Type': 'application/json',
-                //'Cookie' : `csrftoken=${_csrfToken}`,
                 "X-CSRFToken": cookies.get("csrftoken"),
             }
           };
@@ -65,14 +64,12 @@ export default class Login extends Component {
           console.log(res);
           console.log(res.data);
 
-          if(res.status===200){
+          if(res.status===200||201){
             console.log("Log in success");
             this.props.history.push('/home');
-          } else{
-            console.log("Log in failed, Wrong username or password.")
-          }
-        }).catch((err) => {
-            console.log(err);
+        }}).catch((err) => {
+            console.log(`Caught error: ${err}`);
+            alert("Log in failed, Wrong username or password.")
             this.setState({error: "Wrong username or password."})
         });
         /*.then(() => {

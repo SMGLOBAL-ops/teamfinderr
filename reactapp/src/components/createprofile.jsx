@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import bio1 from './bio1.png';
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
   
@@ -59,11 +60,10 @@ export default class CreateProfile extends Component {
           if(res.status===201 || 200){
             console.log("Bio updated");
             this.props.history.push('/home');
-          } else{
-            console.log("Bio contains too many characters.")
           }
         }).catch((err) => {
-            console.log(err);
+            alert("Bio contains too many characters.")
+            console.log("caught", err);
             this.setState({error: "Bio contains too many characters."})
         });
       }
@@ -72,8 +72,10 @@ export default class CreateProfile extends Component {
         return (
             <form onSubmit={this.handleSubmit}>
 
-                <h3>Bio</h3>
-
+                <div class="card">
+                    <img class="card-img-top" src={bio1} alt=""/>
+                </div>
+                <br/>
                 <p>Please add a short bio for your profile here so 
                     that others can see what your skills and interests are! 
                     (Max. 255 chars.)</p>

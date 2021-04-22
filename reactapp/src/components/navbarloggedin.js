@@ -11,6 +11,10 @@ export default class NavbarLoggedOut extends Component{
     event.preventDefault();
     this.props.history.push('/home');
   }
+  redirectMyProject = event => {
+    event.preventDefault();
+    this.props.history.push('/tutorials');
+  }
   redirectProfile = event => {
     event.preventDefault();
     this.props.history.push('/user-profile');
@@ -58,6 +62,9 @@ export default class NavbarLoggedOut extends Component{
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <div className="nav-link" onClick={this.redirectHome}>Home</div>
+              </li>
+              <li className="nav-item">
+                <div className="nav-link" onClick={this.redirectMyProject}>My Projects</div>
               </li>
                 <li className="nav-item">
                 <div className="nav-link" onClick={this.redirectProfile}>Profile</div>

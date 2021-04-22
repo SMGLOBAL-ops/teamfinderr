@@ -121,8 +121,12 @@ export default class Home extends Component {
         return (
             <>
         <div>
+            <div class="card">
+                <img class="card-img-top" src="https://images.pexels.com/photos/1000445/pexels-photo-1000445.jpeg?auto=compress" alt="Card image cap"/>
+            </div>
+            <br/>
         <h1>Home</h1>
-        <p>Welcome {}</p>
+        <p>Welcome</p>
         <h4>Search</h4>
         <div className="input-group">
             

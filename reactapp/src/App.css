@@ -47,4 +47,37 @@ ul.no-bullets {
   text-align: center;
   height: 100px;
 }
+.Form-register {
+  text-align: center;
+  height: 100px;
+}
+.list .action {
+  cursor: pointer;
+}
 
+.submit-form {
+  max-width: 300px;
+  margin: auto;
+}
+
+.edit-form {
+  max-width: 300px;
+  margin: auto;
+}
+.Form-register {
+  text-align: center;
+  height: 100px;
+}
+.list .action {
+  cursor: pointer;
+}
+
+.submit-form {
+  max-width: 300px;
+  margin: auto;
+}
+
+.edit-form {
+  max-width: 300px;
+  margin: auto;
+}

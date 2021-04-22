@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import imgp from './profile.png';
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -52,7 +53,7 @@ export default class UserProfileView extends Component {
             //console.log(`current state of user_id ${this.state.user.pk}`);
         });
 
-        var profileFiltered = this.state.profiles.filter(profile=> profile.user_id==this.state.user.pk)
+        var profileFiltered = this.state.profiles.filter(profile=> profile.user_id===this.state.user.pk)
         //console.log(`profile filtered ${profileFiltered}`)
         this.setState({userProfile:profileFiltered})
 
@@ -61,11 +62,15 @@ export default class UserProfileView extends Component {
 
     addBio(){
         console.log("add bio")
-        //this.props.history.push('/create-profile')
+        this.props.history.push('/create-profile')
     }
     editBio(){
         console.log("edit bio")
-        //this.props.history.push('/edit-profile')
+        this.props.history.push('/edit-profile')
+    }
+    changePassword(){
+        console.log("change password")
+        this.props.history.push('/password-change')
     }
 
     handleCategoryChange = (selectedCategory) => {
@@ -80,11 +85,6 @@ export default class UserProfileView extends Component {
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        const user = {
-            category: this.state.category,
-            name: this.state.name,
-
-        }
 
         const options = {
             headers: {
@@ -99,13 +99,17 @@ export default class UserProfileView extends Component {
           console.log(res);
           console.log(res.data);
 
-          if(res.status!==404){
+          if(res.status===200||201){
+            alert("Skill has been successfully added")
             console.log("Skill added");
-
           } else{
             console.log("Could not add skill.")
             console.log(res.status)
           }
+        }).catch((err) => {
+            alert("Could not add skill. Please select category and input name")
+            console.log("caught", err);
+            this.setState({error: "Could not add skill."})
         });
   
       }
@@ -124,9 +128,8 @@ export default class UserProfileView extends Component {
         return (
         <>
         <div>
-
             <div class="card">
-                <img class="card-img-top" src="https://images.pexels.com/photos/1000445/pexels-photo-1000445.jpeg?auto=compress" alt="Card image cap"/>
+                <img class="card-img-top" src={imgp} alt=""/>
                 <div class="card-body">
                     <h4 class="card-title">Bio</h4>
                     <p class="card-text">
@@ -165,6 +168,15 @@ export default class UserProfileView extends Component {
                             <p>{message}</p>
                     </form>
                 </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Settings</h4>
+                    <p class="card-text"></p>
+                    <a onClick={() => this.changePassword()} class="btn btn-dark btn-block">Change Password</a>
+                </div>
+            </div>
+
+
             </div>
                                    
         </div>

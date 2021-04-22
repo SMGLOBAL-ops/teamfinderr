@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import bio2 from './bio2.png';
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
   
@@ -17,8 +18,24 @@ export default class EditProfile extends Component {
     state = {
         bio: '',
         chars_left: 255,
-        error: ''
+        error: '',
+        user: ''
       }
+
+    componentDidMount = async() => {
+        await axios.get(`http://127.0.0.1:8000/api/v1/dj-rest-auth/user/`,{ 
+            headers: {
+                'Content-Type': 'application/json',
+                "X-CSRFToken": cookies.get("csrftoken"),
+            }
+        })
+        .then(res => {
+            //console.log(res.data);
+            this.setState({user:res.data});
+            //console.log(`current state of user ${this.state.user}`);
+            //console.log(`current state of user_id ${this.state.user.pk}`);
+        });
+    }
 
     redirectHome = event => {
         event.preventDefault();
@@ -51,19 +68,19 @@ export default class EditProfile extends Component {
 
         console.log(options.headers["X-CSRFToken"])
 
-        axios.put(`http://127.0.0.1:8000/api/v1/profiles/`, { bio: this.state.bio }, options)
+        axios.put(`http://127.0.0.1:8000/api/v1/profiles/${this.state.user.pk}/`, { bio: this.state.bio }, options)
         .then(res => {
           console.log(res);
           console.log(res.data);
 
           if(res.status===201 || 200){
+            alert("Bio updated");
             console.log("Bio updated");
-            this.props.history.push('/home');
-          } else{
-            console.log("Bio contains too many characters.")
+            this.props.history.push('/user-profile');
           }
         }).catch((err) => {
-            console.log(err);
+            alert("Bio contains too many characters.")
+            console.log("caught", err);
             this.setState({error: "Bio contains too many characters."})
         });
       }
@@ -72,7 +89,10 @@ export default class EditProfile extends Component {
         return (
             <form onSubmit={this.handleSubmit}>
 
-                <h3>Bio</h3>
+                <div class="card">
+                    <img class="card-img-top" src={bio2} alt=""/>
+                </div>
+                <br/>
 
                 <p>Please edit bio for your profile here! 
                     (Max. 255 chars.)</p>
