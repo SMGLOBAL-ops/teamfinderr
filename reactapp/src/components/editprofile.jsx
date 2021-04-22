@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import bio2 from './bio2.png';
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
   
@@ -88,7 +89,10 @@ export default class EditProfile extends Component {
         return (
             <form onSubmit={this.handleSubmit}>
 
-                <h3>Bio</h3>
+                <div class="card">
+                    <img class="card-img-top" src={bio2} alt=""/>
+                </div>
+                <br/>
 
                 <p>Please edit bio for your profile here! 
                     (Max. 255 chars.)</p>
