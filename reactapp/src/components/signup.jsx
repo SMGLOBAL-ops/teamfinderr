@@ -3,20 +3,6 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
-// const API_HOST = 'http://localhost:8000';
-
-// let _csrfToken = null;
-
-// async function getCsrfToken() {
-//     if (_csrfToken === null) {
-//       const response = await fetch(`${API_HOST}/csrf/`, {
-//         credentials: 'include',
-//       });
-//       const data = await response.json();
-//       _csrfToken = data.csrfToken;
-//     }
-//     return _csrfToken;
-//   }
 
 export default class SignUp extends Component {
 
@@ -98,7 +84,7 @@ export default class SignUp extends Component {
 
     render() {
         return (
-            <>
+            <div>
             <form onSubmit={this.handleSubmit}>
                 <h3 className="Form-register" >Register</h3>
 
@@ -117,7 +103,6 @@ export default class SignUp extends Component {
                     <input type="password" onChange={this.handlePasswordOneChange} className="form-control" placeholder="Enter password" />
                 </div>
 
-
                 <div className="form-group">
                     <label> Confirm Password</label>
                     <input type="password" onChange={this.handlePasswordTwoChange} className="form-control" placeholder="Enter password" />
@@ -129,12 +114,15 @@ export default class SignUp extends Component {
                         <label className="custom-control-label" htmlFor="customCheck1">Agree to Terms and Conditions</label>
                     </div>
                 </div>
+
+
                 <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
                 <p className="forgot-password text-right">
                    Already registered? <button className="btn-primary" onClick={this.redirectLoginPage} >Log in</button>
                 </p>
             </form>
-            </>
+            </div>
+        
         );
     }
 }

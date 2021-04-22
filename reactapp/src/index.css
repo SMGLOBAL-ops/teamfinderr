@@ -36,6 +36,23 @@ html,
   box-shadow: 0px 14px 80px rgba(70, 71, 75, 0.2);
 }
 
+.base-message{
+  width: 40%;
+  margin-left:380px;
+  top: 50%;
+  left: 50%;
+  background-color: #ffffff;
+  opacity: 0.6;
+  border-radius: 25px;
+}
+
+.base-message p {
+  text-align: center;
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
+}
+
 .outer {
   display: flex;
   justify-content: center;
@@ -86,6 +103,7 @@ html,
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 25px;
   width: 40%;
 }
 
