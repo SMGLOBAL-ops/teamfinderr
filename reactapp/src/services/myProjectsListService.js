@@ -8,8 +8,8 @@ const getUserProjects = (profile_pk) => {
   return http.get(`/v1/profiles/${profile_pk}/projects/`);
 };
 
-const getUser = (id) => {
-  return http.get(`/v1/profiles/${id}`);
+const getUser = () => {
+  return http.get(`/v1/dj-rest-auth/user/`);
 };
 const update = (id, data) => {
   return http.put(`/v1/projects/${id}/`, data);
@@ -19,8 +19,8 @@ const remove = (id) => {
   return http.delete(`/v1/projects/${id}/`);
 };
 
-const findByName = (project_pk) => {
-  return http.get(`/api/v1/projects/${project_pk}/members/`);
+const findByName = (profile_pk) => {
+  return http.get(`/v1/profiles/${profile_pk}/projects/`);
 };
 
 const MyProjectsListService = {

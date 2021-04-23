@@ -128,7 +128,7 @@ const MyProject = props => {
       ) : (
         <div>
           <br />
-          <p>Please click on a MyProject...</p>
+          <p>Please click on a Project...</p>
         </div>
       )}
     </div>

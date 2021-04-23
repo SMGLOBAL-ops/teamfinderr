@@ -123,8 +123,8 @@ export default class Home extends Component {
             </div>
             <br/>
         <h1>Home</h1>
-        <p>Welcome</p>
-        <h4>Search</h4>
+        {/* <p>Welcome</p> */}
+        {/* <h4>Search</h4>
         <div className="input-group">
             
             <input type="text" className="form-control" placeholder="Find a member..." aria-label="" aria-describedby="basic-addon1"/>
@@ -132,9 +132,9 @@ export default class Home extends Component {
                 <button className="btn btn-success" type="button">Go</button>
             </div>
             
-        </div>
-        <br/>
-        <div className="card">
+        </div> */}
+        {/* <br/> */}
+        {/* <div className="card">
             <div className="card-body">
                 <h4 className="card-title">My Projects</h4>
                 <p className="card-text">
@@ -143,7 +143,7 @@ export default class Home extends Component {
                 <a href="#!" onClick={this.redirectMyProject} className="btn btn-primary btn-block">Go to my projects</a>
             </div>
         </div>
-        <br/>
+        <br/> */}
         <form onSubmit={this.handleProjectSubmit}>
             <h4>Create a project</h4>
             <div className="form-group">

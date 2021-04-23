@@ -140,7 +140,7 @@ export default class UserProfileView extends Component {
                         </div>
                         <div class="form-group">
                                 <label for="Name">Role name:</label>
-                                <input type="text" onChange={this.handleNameChange} class="form-control" placeholder="Enter name of skill ie Python"/>
+                                <input type="text" onChange={this.handleNameChange} class="form-control" placeholder="Enter name of role"/>
                         </div>
                         <div class="form-group">
                                 <label for="Message">Message:</label>

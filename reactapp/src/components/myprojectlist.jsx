@@ -8,9 +8,7 @@ const cookies = new Cookies();
 const MyProjectsList = (props) => {
   const [myProjects, setMyProjects] = useState([]);
   const [searchName, setSearchName] = useState("");
-  const [profileSet, setProfileSet] = useState([]);
-  const [user, setUser] = useState(0);
-  const [userProfile, setUserProfile] = useState([]);
+  const [userPK, setUserPK] = useState(0);
   const myProjectsRef = useRef();
 
   myProjectsRef.current = myProjects;
@@ -18,75 +16,53 @@ const MyProjectsList = (props) => {
   //useEffect acts like componentDidMount if you pass in empty array
   //as second argument.
   useEffect(() => {
-    retrieveMyProjects();
-    getUserPK();
-    //componentDidMount();
+    componentDidMount();
+    //retrieveMyProjects();
   }, []);
 
-//   //Doesn't work the same way as componentDidMount in class-based components.
-//   const componentDidMount = () => {
+  const componentDidMount = async () => {
 
-//     //console.log("UserProfile calledddddd")
-//     axios.get(`http://127.0.0.1:8000/api/v1/profiles/`,{ 
-//         headers: {
-//             'Content-Type': 'application/json',
-//             "X-CSRFToken": cookies.get("csrftoken"),
-//         }
-//     })
-//     .then(res => {
-//         //console.log(res);
-//         //console.log(res.data);
-//         var profiles = res.data;
-//         setProfileSet(profiles);
-//         console.log(`current state of profileSet ${profileSet}`);
-//     });
-
-//     axios.get(`http://127.0.0.1:8000/api/v1/dj-rest-auth/user/`,{ 
-//         headers: {
-//             'Content-Type': 'application/json',
-//             "X-CSRFToken": cookies.get("csrftoken"),
-//         }
-//     })
-//     .then(res => {
-//         console.log((res.data).pk);
-//         setUser(parseInt((res.data).pk));
-//         console.log(`current state of user ${user}`);
-//         //console.log(`current state of user_id ${user.pk}`);
-//     });
-
-//     var profileFiltered = profileSet.filter(profile=> profile.user_id===user.pk)
-//     console.log(`profile filtered ${profileFiltered}`)
-//     setUserProfile(profileFiltered)
+    await axios.get(`http://127.0.0.1:8000/api/v1/dj-rest-auth/user/`,{ 
+        headers: {
+            'Content-Type': 'application/json',
+            "X-CSRFToken": cookies.get("csrftoken"),
+        }
+    })
+    .then(res => {
+        console.log((res.data).pk);
+        setUserPK((res.data).pk);
+        window.$user_pk = (res.data).pk;
+        console.log(`current state of userPK ${window.$user_pk}`);
+    });
 
     
-// }
+    await axios.get(`http://127.0.0.1:8000/api/v1/profiles/${window.$user_pk}/projects/`,{ 
+        headers: {
+            'Content-Type': 'application/json',
+            "X-CSRFToken": cookies.get("csrftoken"),
+        }
+    })
+        .then((response) => {
+          setMyProjects(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+    
 
-  const getUserPK = () => {
-  
-  axios.get(`http://127.0.0.1:8000/api/v1/dj-rest-auth/user/`,{ 
-    headers: {
-        'Content-Type': 'application/json',
-        "X-CSRFToken": cookies.get("csrftoken"),
-    }
-  })
-  .then((res) => {
-    console.log((res.data).pk);
-    setUser(parseInt((res.data).pk));
-    window.userPK = (res.data).pk;
-    console.log(window.userPK);
-    console.log(`current state of user ${user}`);
-    //console.log(`current state of user_id ${user.pk}`);
-  });
-}
-
-  const onChangeSearchName = (e) => {
+  const onChangeSearchName = async (e) => {
     const searchName = e.target.value;
-    setSearchName(searchName);
+    await setSearchName(searchName);
   };
 
-
-  const retrieveMyProjects = () => {
-    MyProjectsListService.getUserProjects(window.userPK)
+  const findByName = async () => {
+    await axios.get(`http://127.0.0.1:8000/api/v1/profiles/${searchName}/projects/`,{ 
+        headers: {
+            'Content-Type': 'application/json',
+            "X-CSRFToken": cookies.get("csrftoken"),
+        }
+    })
       .then((response) => {
         setMyProjects(response.data);
       })
@@ -94,22 +70,6 @@ const MyProjectsList = (props) => {
         console.log(e);
       });
   };
-
-  const findByName = () => {
-    MyProjectsListService.findByName(searchName)
-      .then((response) => {
-        setMyProjects(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
-  function search(rows) {
-    return rows.filter(
-      (row) => row.name.toLowerCase().indexOf(searchName) > -1
-    );
-  }
 
   const openMyProjects = (rowIndex) => {
     const id = myProjectsRef.current[rowIndex].id;
@@ -117,10 +77,10 @@ const MyProjectsList = (props) => {
     props.history.push("/my-projects/" + id);
   };
 
-  const deleteMyProjects = (rowIndex) => {
+  const deleteMyProjects = async (rowIndex) => {
     const id = myProjectsRef.current[rowIndex].id;
 
-    MyProjectsListService.remove(id)
+    await MyProjectsListService.remove(id)
       .then((response) => {
         props.history.push("/my-projects");
 
@@ -188,7 +148,7 @@ const MyProjectsList = (props) => {
           <input
             type="text"
             className="form-control"
-            placeholder="Search by Name"
+            placeholder="Search by user_id"
             value={searchName}
             onChange={onChangeSearchName}
           />
