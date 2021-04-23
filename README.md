@@ -45,3 +45,19 @@ A network for skilled individuals looking to start collaborating on projects, he
 ### Model Overview
 ![models](https://user-images.githubusercontent.com/78368044/114190867-b4328380-9943-11eb-8296-5400710dcffc.png)
 
+### To use the React frontend:
+cd to inside teamfinderr directory:
+1) pip install -r requirements.txt
+2) pip install django-cors-headers
+3) pip install djangorestframework-jwt --user
+4) $env:DJANGO_SECRET_KEY='secret'
+5) python manage.py migrate
+
+cd to inside reactapp directory:
+1) npm install i bootstrap
+2) npm run build
+
+cd to inside teamfinderr directory
+1) python manage.py runserver
+
+
