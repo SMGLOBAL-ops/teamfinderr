@@ -1,25 +1,92 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import MyProjectsListService from "../services/myProjectsListService";
 import { useTable } from "react-table";
+import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const MyProjectsList = (props) => {
   const [myProjects, setMyProjects] = useState([]);
   const [searchName, setSearchName] = useState("");
+  const [profileSet, setProfileSet] = useState([]);
+  const [user, setUser] = useState(0);
+  const [userProfile, setUserProfile] = useState([]);
   const myProjectsRef = useRef();
 
   myProjectsRef.current = myProjects;
 
+  //useEffect acts like componentDidMount if you pass in empty array
+  //as second argument.
   useEffect(() => {
     retrieveMyProjects();
+    getUserPK();
+    //componentDidMount();
   }, []);
+
+//   //Doesn't work the same way as componentDidMount in class-based components.
+//   const componentDidMount = () => {
+
+//     //console.log("UserProfile calledddddd")
+//     axios.get(`http://127.0.0.1:8000/api/v1/profiles/`,{ 
+//         headers: {
+//             'Content-Type': 'application/json',
+//             "X-CSRFToken": cookies.get("csrftoken"),
+//         }
+//     })
+//     .then(res => {
+//         //console.log(res);
+//         //console.log(res.data);
+//         var profiles = res.data;
+//         setProfileSet(profiles);
+//         console.log(`current state of profileSet ${profileSet}`);
+//     });
+
+//     axios.get(`http://127.0.0.1:8000/api/v1/dj-rest-auth/user/`,{ 
+//         headers: {
+//             'Content-Type': 'application/json',
+//             "X-CSRFToken": cookies.get("csrftoken"),
+//         }
+//     })
+//     .then(res => {
+//         console.log((res.data).pk);
+//         setUser(parseInt((res.data).pk));
+//         console.log(`current state of user ${user}`);
+//         //console.log(`current state of user_id ${user.pk}`);
+//     });
+
+//     var profileFiltered = profileSet.filter(profile=> profile.user_id===user.pk)
+//     console.log(`profile filtered ${profileFiltered}`)
+//     setUserProfile(profileFiltered)
+
+    
+// }
+
+  const getUserPK = () => {
+  
+  axios.get(`http://127.0.0.1:8000/api/v1/dj-rest-auth/user/`,{ 
+    headers: {
+        'Content-Type': 'application/json',
+        "X-CSRFToken": cookies.get("csrftoken"),
+    }
+  })
+  .then((res) => {
+    console.log((res.data).pk);
+    setUser(parseInt((res.data).pk));
+    window.userPK = (res.data).pk;
+    console.log(window.userPK);
+    console.log(`current state of user ${user}`);
+    //console.log(`current state of user_id ${user.pk}`);
+  });
+}
 
   const onChangeSearchName = (e) => {
     const searchName = e.target.value;
     setSearchName(searchName);
   };
 
+
   const retrieveMyProjects = () => {
-    MyProjectsListService.getAll()
+    MyProjectsListService.getUserProjects(window.userPK)
       .then((response) => {
         setMyProjects(response.data);
       })

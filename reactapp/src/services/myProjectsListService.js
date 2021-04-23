@@ -4,8 +4,8 @@ const getAll = () => {
   return http.get("/v1/projects/");
 };
 
-const get = (id) => {
-  return http.get(`/v1/projects/${id}`);
+const getUserProjects = (profile_pk) => {
+  return http.get(`/v1/profiles/${profile_pk}/projects/`);
 };
 
 const getUser = (id) => {
@@ -26,7 +26,7 @@ const findByName = (project_pk) => {
 const MyProjectsListService = {
   getAll,
   getUser,
-  get,
+  getUserProjects,
   update,
   remove,
   findByName,
