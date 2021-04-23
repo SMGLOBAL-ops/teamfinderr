@@ -128,13 +128,7 @@ export default class UserProfileView extends Component {
         <> <div>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Skills</h4>
-                    <p class="card-text">
-                        Current skills
-                    </p>
-                    <ul>
-                        {listOfSkills}
-                    </ul>
+                    <h4 class="card-title">Project Request</h4>
                     <form onSubmit={this.handleSubmit}>
                         <div class="form-group">
                             <label for="Select">Choose skills</label>
@@ -145,14 +139,14 @@ export default class UserProfileView extends Component {
                             </select>
                         </div>
                         <div class="form-group">
-                                <label for="Name">Name:</label>
+                                <label for="Name">Role name:</label>
                                 <input type="text" onChange={this.handleNameChange} class="form-control" placeholder="Enter name of skill ie Python"/>
                         </div>
                         <div class="form-group">
                                 <label for="Message">Message:</label>
                                 <input type="text" onChange={this.handleMessageChange} class="form-control" placeholder="Enter message for the group"/>
                         </div>
-                            <button type="submit" class="btn btn-dark btn-block">Add a skill</button>
+                            <button type="submit" class="btn btn-dark btn-block">Send</button>
                             <p>{message}</p>
                     </form>
                 </div> 

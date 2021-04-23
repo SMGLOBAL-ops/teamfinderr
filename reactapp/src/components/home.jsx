@@ -23,7 +23,6 @@ export default class Home extends Component {
       }
 
     componentDidMount = async () => {
-        console.log("Home calledddddd")
         await axios.get(`http://127.0.0.1:8000/api/v1/profiles/`,{ 
             headers: {
                 'Content-Type': 'application/json',
@@ -31,11 +30,8 @@ export default class Home extends Component {
             }
         })
         .then(res => {
-            //console.log(res);
-            //console.log(res.data);
             const profiles = res.data;
             this.setState({profiles});
-            console.log(`current state of profiles ${this.state.profiles}`);
         });
 
         await axios.get(`http://127.0.0.1:8000/api/v1/dj-rest-auth/user/`,{ 
@@ -45,14 +41,10 @@ export default class Home extends Component {
             }
         })
         .then(res => {
-            //console.log(res.data);
             this.setState({user:res.data});
-            //console.log(`current state of user ${this.state.user}`);
-            //console.log(`current state of user_id ${this.state.user.pk}`);
         });
 
         var profileFiltered = this.state.profiles.filter(profile=> profile.user_id==this.state.user.pk)
-        //console.log(`profile filtered ${profileFiltered}`)
         this.setState({userProfile:profileFiltered})
 
         

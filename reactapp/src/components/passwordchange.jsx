@@ -55,11 +55,6 @@ class PasswordChange extends Component {
                 <h3>Change Password</h3>
 
                 <div className="form-group">
-                    <label>Username</label>
-                    <input type="username" className="form-control" placeholder="Enter username" />
-                </div>
-
-                <div className="form-group">
                     <label>Password</label>
                     <input type="password" onChange={this.handlePasswordChange} className="form-control" placeholder="Enter password" />
                 </div>

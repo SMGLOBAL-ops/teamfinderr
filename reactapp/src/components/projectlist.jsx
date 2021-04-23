@@ -3,10 +3,6 @@ import img from './projects.png'
 import '../styles.css';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
 } from "react-router-dom"; 
 
 import axios from "axios";
