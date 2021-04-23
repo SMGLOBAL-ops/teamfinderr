@@ -71,6 +71,11 @@ export default class Home extends Component {
         this.props.history.push('/create-profile')
     }
 
+    redirectMyProject = event => {
+        event.preventDefault();
+        this.props.history.push('/my-projects');
+      }
+
     handleDescChange = async (event) => {
         await this.setState({ description: event.target.value });
         await this.setState({
@@ -143,7 +148,7 @@ export default class Home extends Component {
                 <p className="card-text">
                     get existing projects as a list
                 </p>
-                <a href="#!" className="btn btn-primary btn-block">Go to my projects</a>
+                <a href="#!" onClick={this.redirectMyProject} className="btn btn-primary btn-block">Go to my projects</a>
             </div>
         </div>
         <br/>

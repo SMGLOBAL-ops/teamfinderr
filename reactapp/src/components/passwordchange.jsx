@@ -54,7 +54,7 @@ class PasswordChange extends Component {
             <>
             <form onSubmit={this.handleClick}>
 
-                <h3>Forgot Password?</h3>
+                <h3>Change Password</h3>
 
                 <div className="form-group">
                     <label>Username</label>
