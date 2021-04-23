@@ -28,7 +28,7 @@ html,
 #root,
 .outer {
   width: 100%;
-  height: 100%;
+  height: 50%;
 }
 
 .navbar-light {
@@ -38,12 +38,21 @@ html,
 
 .base-message {
   width: 40%;
-  margin-left: 380px;
+  margin-left: 500px;
   top: 50%;
   left: 50%;
   background-color: #ffffff;
   opacity: 0.6;
   border-radius: 25px;
+  background-color: #2f3742;
+  color: #dfe0e4;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6,
+    0 0 25px #0073e6, 0 0 30px #0073e6, 0 0 35px #0073e6;
 }
 
 .base-message p {
@@ -58,6 +67,7 @@ html,
   justify-content: center;
   flex-direction: column;
   text-align: left;
+  height: 300%;
 }
 
 .inner {
@@ -65,7 +75,6 @@ html,
   margin: auto;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-  padding: 30px 55px 45px 55px;
   border-radius: 15px;
   transition: all 0.3s;
 }
@@ -137,4 +146,12 @@ body {
   100% {
     background-position: 0% 50%;
   }
+}
+.base-message {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
 }

@@ -82,6 +82,7 @@ export default class SignUp extends Component {
       }
 
 
+
     render() {
         return (
             <div>
@@ -116,9 +117,9 @@ export default class SignUp extends Component {
                 </div>
 
 
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
+                <button type="submit" className="btn btn-primary btn-lg active btn-block">Register</button>
                 <p className="forgot-password text-right">
-                   Already registered? <button className="btn-primary" onClick={this.redirectLoginPage} >Log in</button>
+                   Already registered? <button className="btn btn-primary btn-success" onClick={this.redirectLoginPage} >Log in</button>
                 </p>
             </form>
             </div>

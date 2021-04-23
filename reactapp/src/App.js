@@ -24,35 +24,14 @@ import MyProject from "./components/myproject";
 import MyProjectsList from "./components/myprojectlist";
 
 
-
 function App() {
   return (<Router>
     <div className="App">
 
 
 
-      {/* Project table NavBar*/}
 
       <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <a href="/tutorials" className="navbar-brand">
-          
-        </a>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/tutorials"} className="nav-link">
-              Projects Available
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to={"/add"} className="nav-link">
-              Add a Project 
-            </Link>
-          </li>
-        </div>
-      </nav>
-    </div>
-
       <Switch>
         <Route exact path='/' component={Logo} />
       </Switch>
@@ -60,6 +39,8 @@ function App() {
       <Switch>
         <Route exact path='/' component={BaseMessage} />
       </Switch>
+      </div>
+     
 
       <Switch>
         <Route path="/my-projects/:id"  component={NavbarLoggedIn} />

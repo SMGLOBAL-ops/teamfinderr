@@ -111,7 +111,7 @@ export default class Login extends Component {
 
                 <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
                 <p className="forgot-password text-right">
-                    <button onClick={this.redirectForgotPassword}>Forgot password?</button>
+                    <button className="btn btn-primary btn-warning"onClick={this.redirectForgotPassword}>Forgot password?</button>
                 </p>
             </form>
         );

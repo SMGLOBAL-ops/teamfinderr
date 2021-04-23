@@ -3,14 +3,24 @@ import '../App.css';
   
 export default class Logo extends Component{
 
-  render() {
-    return(
-        <div className="base-message">
-        <p> Welcome to TeamFound! Register
-            or Login to begin.
-        </p>
-        </div>
-    );
-  }
+
+    render() {
+
+  const text = ' Welcome to TeamFound!\n Collaboration in Dev Ops'; 
   
+  let newText = text.split('\n').map(i => {
+    return <h3>{i}</h3>
+});
+
+  return(
+
+      <div className="base-message">
+        <h3> 
+         {newText}
+        </h3>
+      </div>
+      
+  );
+}
+
 }
