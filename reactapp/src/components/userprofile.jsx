@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import imgp from './profile.png';
+import profile from './profile.png';
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -110,10 +110,12 @@ export default class UserProfileView extends Component {
             );
         }
         return (
-        <>
-        <div>
-            <div class="card">
-                <img class="card-img-top" src={imgp} alt=""/>
+        
+        <div class="card">
+
+        <img class="card-img-top" src={profile} alt=""/>
+
+            
                 <div class="card-body">
                     <h4 class="card-title">Bio</h4>
                     <p class="card-text">
@@ -124,7 +126,7 @@ export default class UserProfileView extends Component {
                     <a onClick={() => this.addBio()} class="btn btn-dark">Add Bio</a>
                     <a onClick={() => this.editBio()} class="btn btn-dark">Edit Bio</a>
                 </div>
-            </div>
+           
 
             <div class="card">
                 <div class="card-body">
@@ -159,13 +161,10 @@ export default class UserProfileView extends Component {
                     <a onClick={() => this.changePassword()} class="btn btn-dark btn-block">Change Password</a>
                 </div>
             </div>
-
-
             </div>
                                    
         </div>
 
-        </>
         );
     }
 }

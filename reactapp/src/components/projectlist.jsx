@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import img from './projects.png'
 import '../styles.css';
-import {
-  BrowserRouter as Router,
-} from "react-router-dom"; 
 
 import axios from "axios";
 import Cookies from "universal-cookie";
@@ -60,6 +57,11 @@ class ProjectListView extends Component {
 
     }
 
+    redirectProjectRequest = event => {
+      event.preventDefault();
+      this.props.history.push('/project-request');
+    }
+
     sendRequest = async (id) => {
       console.log(`id is passed ${id}`)
       const message = `Hi, I am interested in joining your project`
@@ -109,7 +111,6 @@ class ProjectListView extends Component {
       const { length: count }  = Object.keys(this.state.projects);
   
       if (count === 0) return <p>There are no projects available in the database!</p>
-      //console.log(`count is ${count}`)
 
       const projects = this.state.projects;
 
@@ -118,16 +119,16 @@ class ProjectListView extends Component {
           <td>{project.name}</td>
           <td>{project.description}</td>
           <td>{project.members}</td>
-          <td><button onClick={()=>this.sendRequest(project.id)} className="btn btn-success btn-sm">Join</button></td>
+          <td><button onClick={this.redirectProjectRequest} className="btn btn-success btn-sm">Join</button></td>
         </tr>
       )
 
       return (
-      <Router>                
+                    
         <div class="card">
-            <img class="card-img-top" src={img} alt=""/>
-        </div>
 
+        <img class="card-img-top" src={img} alt=""/>
+        
         <p>Showing {count} projects in the database</p>
         
        <table className="table">
@@ -135,7 +136,7 @@ class ProjectListView extends Component {
           <tr>
             <th>Project</th>
             <th>Description</th>
-            <th>Member's id</th>
+            <th>Owner's id</th>
             <th>Join</th>
           </tr>
         </thead>
@@ -144,7 +145,7 @@ class ProjectListView extends Component {
           </tbody>
       </table>
 
-      </Router>
+      </div>
       )}
   }
    

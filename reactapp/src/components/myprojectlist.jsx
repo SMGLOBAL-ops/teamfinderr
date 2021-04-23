@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import MyProjectsListService from "../services/myProjectsListService";
 import { useTable } from "react-table";
 import axios from "axios";
+import img from './projects.png';
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -17,7 +18,6 @@ const MyProjectsList = (props) => {
   //as second argument.
   useEffect(() => {
     componentDidMount();
-    //retrieveMyProjects();
   }, []);
 
   const componentDidMount = async () => {
@@ -142,6 +142,10 @@ const MyProjectsList = (props) => {
   });
 
   return (
+    <div class="card">
+
+    <img class="card-img-top" src={img} alt=""/>
+    
     <div className="list row">
       <div className="col-md-8">
         <div className="input-group mb-3">
@@ -195,6 +199,7 @@ const MyProjectsList = (props) => {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 };

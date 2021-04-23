@@ -74,7 +74,7 @@ const MyProject = props => {
     <div>
       {currentMyProject ? (
         <div className="edit-form">
-          <h4>MyProject</h4>
+          <h4>Update Project</h4>
           <form>
             <div className="form-group">
               <label htmlFor="name">Name</label>

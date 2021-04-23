@@ -35,22 +35,9 @@ export default class SignUp extends Component {
         this.setState({ password2: event.target.value });
         }
 
-    async componentDidMount() {
-        //_csrfToken = await getCsrfToken();
-        }
-
     handleSubmit = (event) => {
         event.preventDefault();
 
-        //console.log(_csrfToken);
-
-        // const user = {
-        //     username: this.state.username,
-        //     email: this.state.email,
-        //     password1: this.state.password1,
-        //     password2: this.state.password2
-
-        // }
 
         const options = {
             headers: {

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import imgp from './profile.png';
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -122,7 +121,7 @@ export default class UserProfileView extends Component {
         }
 
         const id = this.props.match;
-        //console.log(`id is ${JSON.stringify(id)}`);
+        
 
         return (
         <> <div>
@@ -131,7 +130,7 @@ export default class UserProfileView extends Component {
                     <h4 class="card-title">Project Request</h4>
                     <form onSubmit={this.handleSubmit}>
                         <div class="form-group">
-                            <label for="Select">Choose skills</label>
+                            <label for="Select">What skill can you bring to this team?</label>
                             <select value={this.state.category} id="Select" class="form-control" onChange={this.handleCategoryChange} >
                                 {categorys.map(category => 
                                     <option value={category.value}>{category.label}</option>
@@ -147,7 +146,6 @@ export default class UserProfileView extends Component {
                                 <input type="text" onChange={this.handleMessageChange} class="form-control" placeholder="Enter message for the group"/>
                         </div>
                             <button type="submit" class="btn btn-dark btn-block">Send</button>
-                            <p>{message}</p>
                     </form>
                 </div> 
             </div>
