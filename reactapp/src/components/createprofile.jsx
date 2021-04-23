@@ -39,10 +39,6 @@ export default class CreateProfile extends Component {
         
         console.log(this.state.bio)
 
-        // const profile = {
-        //     bio: this.state.bio,
-        // }
-
         const options = {
             headers: {
                 'Content-Type': 'application/json',

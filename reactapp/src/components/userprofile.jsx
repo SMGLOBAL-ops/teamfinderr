@@ -25,7 +25,6 @@ export default class UserProfileView extends Component {
      }
 
     componentDidMount = async () => {
-        //console.log("UserProfile calledddddd")
         await axios.get(`http://127.0.0.1:8000/api/v1/profiles/`,{ 
             headers: {
                 'Content-Type': 'application/json',
@@ -33,11 +32,8 @@ export default class UserProfileView extends Component {
             }
         })
         .then(res => {
-            //console.log(res);
-            //console.log(res.data);
             const profiles = res.data;
             this.setState({profiles});
-            console.log(`current state of profiles ${this.state.profiles}`);
         });
 
         await axios.get(`http://127.0.0.1:8000/api/v1/dj-rest-auth/user/`,{ 
@@ -47,17 +43,11 @@ export default class UserProfileView extends Component {
             }
         })
         .then(res => {
-            //console.log(res.data);
             this.setState({user:res.data});
-            //console.log(`current state of user ${this.state.user}`);
-            //console.log(`current state of user_id ${this.state.user.pk}`);
         });
 
         var profileFiltered = this.state.profiles.filter(profile=> profile.user_id===this.state.user.pk)
-        //console.log(`profile filtered ${profileFiltered}`)
-        this.setState({userProfile:profileFiltered})
-
-        
+        this.setState({userProfile:profileFiltered})        
     }
 
     addBio(){
@@ -96,15 +86,9 @@ export default class UserProfileView extends Component {
 
         await axios.post(`http://127.0.0.1:8000/api/v1/profiles/${this.state.user.pk}/skills/`, { category: this.state.category, name: this.state.name }, options)
         .then(res => {
-          console.log(res);
-          console.log(res.data);
-
           if(res.status===200||201){
             alert("Skill has been successfully added")
             console.log("Skill added");
-          } else{
-            console.log("Could not add skill.")
-            console.log(res.status)
           }
         }).catch((err) => {
             alert("Could not add skill. Please select category and input name")

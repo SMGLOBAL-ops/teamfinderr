@@ -30,10 +30,7 @@ export default class EditProfile extends Component {
             }
         })
         .then(res => {
-            //console.log(res.data);
             this.setState({user:res.data});
-            //console.log(`current state of user ${this.state.user}`);
-            //console.log(`current state of user_id ${this.state.user.pk}`);
         });
     }
 
@@ -52,12 +49,6 @@ export default class EditProfile extends Component {
     handleSubmit = (event) => {
 
         event.preventDefault();
-        
-        console.log(this.state.bio)
-
-        // const profile = {
-        //     bio: this.state.bio,
-        // }
 
         const options = {
             headers: {

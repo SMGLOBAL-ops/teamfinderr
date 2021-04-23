@@ -30,7 +30,6 @@ export default class UserProfileView extends Component {
 
 
     componentDidMount = async () => {
-        //console.log("UserProfile calledddddd")
         await axios.get(`http://127.0.0.1:8000/api/v1/profiles/`,{ 
             headers: {
                 'Content-Type': 'application/json',
@@ -38,11 +37,8 @@ export default class UserProfileView extends Component {
             }
         })
         .then(res => {
-            //console.log(res);
-            //console.log(res.data);
             const profiles = res.data;
             this.setState({profiles});
-            console.log(`current state of profiles ${this.state.profiles}`);
         });
 
         await axios.get(`http://127.0.0.1:8000/api/v1/dj-rest-auth/user/`,{ 
@@ -52,17 +48,11 @@ export default class UserProfileView extends Component {
             }
         })
         .then(res => {
-            //console.log(res.data);
             this.setState({user:res.data});
-            //console.log(`current state of user ${this.state.user}`);
-            //console.log(`current state of user_id ${this.state.user.pk}`);
         });
 
         var profileFiltered = this.state.profiles.filter(profile=> profile.user_id===this.state.user.pk)
-        //console.log(`profile filtered ${profileFiltered}`)
         this.setState({userProfile:profileFiltered})
-
-        
     }
 
     addBio(){
@@ -110,9 +100,6 @@ export default class UserProfileView extends Component {
           if(res.status===200||201){
             alert("Request has been successfully made")
             console.log("Submitted request successfully");
-          } else{
-            console.log("Could not request.")
-            console.log(res.status)
           }
         }).catch((err) => {
             alert("Could not request. Please select category and input name")
@@ -135,7 +122,7 @@ export default class UserProfileView extends Component {
         }
 
         const id = this.props.match;
-        console.log(`id is ${JSON.stringify(id)}`);
+        //console.log(`id is ${JSON.stringify(id)}`);
 
         return (
         <> <div>

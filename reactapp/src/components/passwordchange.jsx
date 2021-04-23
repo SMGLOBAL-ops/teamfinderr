@@ -11,12 +11,10 @@ class PasswordChange extends Component {
 
     handlePasswordChange = async (event) => {
         await this.setState({ password: event.target.value });
-        //console.log(`password1 ${this.state.password}`)
         }
 
     handlePasswordChange2 = async (event) => {
         await this.setState({ password2: event.target.value });
-        //console.log(`password2 ${this.state.password2}`)
         }
 
     handleClick = async (event) => {

@@ -34,15 +34,11 @@ export default class Login extends Component {
         this.setState({ password: event.target.value });
         }
 
-    // async componentDidMount() {
-    //     //_csrfToken = await getCsrfToken();
-    //     }
 
     handleSubmit = (event) => {
         event.preventDefault();
        
-        //console.log(_csrfToken);
-
+ 
         const user = {
             username: this.state.username,
             email: this.state.email,
@@ -57,8 +53,6 @@ export default class Login extends Component {
             }
           };
 
-        console.log(user)
-
         axios.post(`http://127.0.0.1:8000/api/v1/dj-rest-auth/login/`, { username: this.state.username, password: this.state.password }, options)
         .then(res => {
           console.log(res);
@@ -72,13 +66,6 @@ export default class Login extends Component {
             alert("Log in failed, Wrong username or password.")
             this.setState({error: "Wrong username or password."})
         });
-        /*.then(() => {
-            console.log(this.state)
-            if (this.state.error===""){
-                this.props.history.push('/home');
-            }
-        });
-        */
       }
 
     render() {
